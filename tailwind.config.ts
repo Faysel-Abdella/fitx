@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const { heroui } = require("@heroui/react");
+import { heroui } from "@heroui/react";
 
 export default {
   content: [
@@ -14,6 +14,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        mainGray: "#A1A1A1",
+        mainBlue: "#006BFF",
       },
     },
   },
