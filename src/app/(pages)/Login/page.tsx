@@ -1,6 +1,6 @@
 'use client'
 import logo from "@/app/assets/Logo.svg";
-import eye from "@/app/assets/Eye.svg"
+
 import Image from "next/image";
 import TextInput from "@/components/inputs/Input";
 

@@ -4,7 +4,6 @@ import searchIcon from "@/app/assets/Search Icon.svg";
 
 export const SearchInput = ({
   placeholder,
-  inputWrapper,
   onClick,
 }: {
   placeholder: string;

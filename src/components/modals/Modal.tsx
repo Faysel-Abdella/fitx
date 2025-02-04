@@ -2,10 +2,7 @@ import React, { ReactNode } from "react";
 import {
   Modal as NModal,
   ModalContent,
-  // ModalHeader,
   ModalBody,
-
-  // useDisclosure,
 } from "@heroui/react";
 
 const Modal = ({
@@ -34,7 +31,7 @@ const Modal = ({
       }}
     >
       <ModalContent className="w-full">
-        {(onClose) => (
+        {() => (
           <>
             <ModalBody>{children}</ModalBody>
           </>
