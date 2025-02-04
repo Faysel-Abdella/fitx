@@ -1,14 +1,17 @@
 import assets from "@/assets";
 
-// dumbbell,
-// dumbbellActive,
-// hand,
-// handActive,
-// square,
-// squareActive,
-// trophy,
-// trophyActive,
-const sideBarContent = [
+const sideBarContent: {
+  order: string;
+  mainTitle: string;
+  init: string;
+  firstRoute: string;
+  icon: string;
+  activeIcon: string;
+  subTitles: {
+    label: string;
+    route: string;
+  }[];
+}[] = [
   {
     order: "1",
     mainTitle: "회원",
@@ -64,7 +67,6 @@ const sideBarContent = [
       },
     ],
   },
-  ,
   {
     order: "5",
     mainTitle: " 대회관리",
