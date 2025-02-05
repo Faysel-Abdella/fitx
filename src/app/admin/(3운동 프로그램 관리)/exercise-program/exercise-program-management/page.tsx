@@ -1,16 +1,14 @@
-"use client"
+"use client";
 import Header from "@/components/Header";
-import TextInput from "@/components/inputs/Input";
+
 import Modal from "@/components/modals/Modal";
 import Template from "@/components/templateComponent/Template";
-import { Button, useDisclosure } from "@heroui/react";
+import { useDisclosure } from "@heroui/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
 import ModalContent from "./components/ModalContent";
 import { ToggleRadio } from "@/components/buttons/RadioButton";
 
 const ExerciseProgramManagement = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const handleRoute = () =>
@@ -22,7 +20,7 @@ const ExerciseProgramManagement = () => {
       <Header title="템플릿 관리" />
       <div className="flex justify-between items-center mt-5">
         <div className="flex gap-5">
-          <ToggleRadio label="전체 선택"/>
+          <ToggleRadio label="전체 선택" />
           <button
             onClick={onOpen}
             className="py-[10px] px-[20px] bg-[#4D4D4D] text-white rounded-[5px]"
@@ -32,10 +30,11 @@ const ExerciseProgramManagement = () => {
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            children={<ModalContent/>}
             paddingHorizontal="px-0"
-            raduis="rounded-[5px]"
-          />
+            radius="rounded-[5px]"
+          >
+            <ModalContent />
+          </Modal>
         </div>
         <button
           onClick={handleRoute}

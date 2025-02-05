@@ -14,19 +14,12 @@ const bodyData = [
 const headerData = ["세트", "횟수", "중량", "RPE", "휴식"];
 
 const Template: React.FC<TemplateProps> = ({ title }) => {
-  // Use useState inside the Template component
-  const [selectedOption, setSelectedOption] = useState<string>("");
+
 
   return (
     <div className="flex w-full flex-col gap-[14px] p-[14px] rounded-[10px] bg-white">
       <div className="flex gap-[14px]">
-        {/* Pass selectedOption and setSelectedOption to RadioButton */}
-        {/* <RadioButton
-          options={[title]}
-          selectedValue={selectedOption}
-          onChange={(selected) => setSelectedOption(selected)}
-          optionStyles="flex flex-col gap-2 text-[14px] font-[400] text-[#333333]"
-        /> */}
+        
         <ToggleRadio label={title}/>
       </div>
       <section>

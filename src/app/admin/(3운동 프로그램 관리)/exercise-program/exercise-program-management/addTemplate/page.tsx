@@ -9,7 +9,6 @@ import {
 import Modal from "@/components/modals/Modal";
 import AddTemplateModal from "./components/AddTemplateModal";
 import { useDisclosure } from "@heroui/react";
-import { section } from "framer-motion/client";
 import Header from "@/components/Header";
 export default function ExerciseForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -67,11 +66,9 @@ export default function ExerciseForm() {
                 className="w-5 h-5 text-gray-400 absolute right-3"
                 onClick={onOpen}
               />
-              <Modal
-                children={<AddTemplateModal />}
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-              />
+              <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <AddTemplateModal />
+              </Modal>
             </div>
           </div>
 

@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 interface ToggleRadioProps {
-  name?: string
+
   label?: string
   checked?: boolean
   onChange?: (checked: boolean) => void
@@ -11,7 +11,7 @@ interface ToggleRadioProps {
 }
 
 export function ToggleRadio({
-  name,
+
   label,
   checked: defaultChecked = false,
   onChange,
