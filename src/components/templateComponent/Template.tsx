@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import { RadioButton } from "../buttons/RadioButton"; // Import your RadioButton component
+import {  ToggleRadio } from "../buttons/RadioButton"; // Import your RadioButton component
 
 interface TemplateProps {
   title: string;
@@ -21,12 +21,13 @@ const Template: React.FC<TemplateProps> = ({ title }) => {
     <div className="flex w-full flex-col gap-[14px] p-[14px] rounded-[10px] bg-white">
       <div className="flex gap-[14px]">
         {/* Pass selectedOption and setSelectedOption to RadioButton */}
-        <RadioButton
+        {/* <RadioButton
           options={[title]}
           selectedValue={selectedOption}
           onChange={(selected) => setSelectedOption(selected)}
           optionStyles="flex flex-col gap-2 text-[14px] font-[400] text-[#333333]"
-        />
+        /> */}
+        <ToggleRadio label={title}/>
       </div>
       <section>
         <table className="w-full">

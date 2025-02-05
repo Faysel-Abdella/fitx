@@ -1,5 +1,4 @@
-"use client";
-import { RadioButton } from "@/components/buttons/RadioButton";
+"use client"
 import Header from "@/components/Header";
 import TextInput from "@/components/inputs/Input";
 import Modal from "@/components/modals/Modal";
@@ -8,6 +7,7 @@ import { Button, useDisclosure } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ModalContent from "./components/ModalContent";
+import { ToggleRadio } from "@/components/buttons/RadioButton";
 
 const ExerciseProgramManagement = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
@@ -22,12 +22,7 @@ const ExerciseProgramManagement = () => {
       <Header title="템플릿 관리" />
       <div className="flex justify-between items-center mt-5">
         <div className="flex gap-5">
-          <RadioButton
-            options={["전체 선택"]}
-            selectedValue={selectedOption}
-            onChange={(selected) => setSelectedOption(selected)}
-            optionStyles="flex flex-col gap-2 text-[14px] font-[400] text-[#333333]"
-          />
+          <ToggleRadio label="전체 선택"/>
           <button
             onClick={onOpen}
             className="py-[10px] px-[20px] bg-[#4D4D4D] text-white rounded-[5px]"
