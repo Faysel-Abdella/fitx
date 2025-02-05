@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react'
+import TopContent from './components/TopContent'
+import Page from './components/showTable'
 
-const Template = () => {
-  return <div>Template</div>;
-};
+const page = () => {
+  return (
+    <div>
+      <TopContent/>
+      <Page/>
+    </div>
+  )
+}
 
-export default Template;
+export default page

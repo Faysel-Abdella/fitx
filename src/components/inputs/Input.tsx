@@ -15,7 +15,7 @@ const TextInput = ({
 }: IInput) => {
   return (
     <div
-      className={`flex gap-2 w-full justify-center items-center ${containerStyle}`}
+      className={`flex  w-full justify-center items-center ${containerStyle}`}
     >
       {label && (
         <label className={`${labelColor} text-[14px] font-[400] ${labelWidth}`}>
