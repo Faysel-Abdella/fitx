@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const ProgramComposition = () => {
-  return <div>ProgramComposition</div>;
-};
+const page = () => {
+  return (
+    <div>page</div>
+  )
+}
 
-export default ProgramComposition;
+export default page

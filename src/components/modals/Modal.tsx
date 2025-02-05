@@ -9,6 +9,7 @@ const Modal = ({
   isOpen,
   onOpenChange,
   children,
+  radius,
   modalWidthInPercent,
   paddingHorizontal = "px-6 py-0",
 }: {
@@ -17,6 +18,7 @@ const Modal = ({
   children: ReactNode;
   modalWidthInPercent?: string;
   paddingHorizontal?: string;
+  radius?:string
 }) => {
   // const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
@@ -30,7 +32,7 @@ const Modal = ({
         closeButton: "hidden",
       }}
     >
-      <ModalContent className="w-full">
+      <ModalContent className={`w-full ${radius} `}>
         {() => (
           <>
             <ModalBody>{children}</ModalBody>
