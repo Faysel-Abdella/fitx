@@ -2,7 +2,6 @@
 import Calendar from "@/components/Calendar";
 import Header from "@/components/Header";
 import ProfilePreview from "@/components/ProfilePreview";
-import { label } from "framer-motion/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -43,7 +42,7 @@ const bodyData2 = [
 ];
 
 const headerData = [{key:"1",label:""},{key:"2" ,label:"세트"}, {key:"3", label:"횟수"}, {key:"4",label:"중량"}, {key:"5",label:"RPE"}, {key:"6",label:"휴식"}];
-const pages = () => {
+const PlayerDetail = () => {
   const router = useRouter();
   const handleroute = () => {
     console.log("Button clicked");
@@ -84,7 +83,7 @@ const pages = () => {
               <table className="w-full">
                 <thead>
                   <tr>
-                    {headerData.map((data, index) => (
+                    {headerData.map((data) => (
                       <th
                         key={data.key}
                         className="text-[#D1D1D1] text-xs px-3 py-2"
@@ -189,4 +188,4 @@ const pages = () => {
   );
 };
 
-export default pages;
+export default PlayerDetail;
