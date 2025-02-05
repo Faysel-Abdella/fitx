@@ -11,7 +11,7 @@ import TextInput from "@/components/inputs/Input";
 import { Exercise, ExerciseSet } from "../../../../exercise-program-management/addTemplate/type";
 
 
-const page = () => {
+const AddExercise = () => {
    
   const [exercise, setExercise] = useState<Exercise>({
     name: "",
@@ -188,4 +188,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AddExercise;

@@ -9,13 +9,13 @@ import {
   Exercise,
   ExerciseSet,
 } from "../../../exercise-program-management/addTemplate/type";
-import Link from "next/link";
+
 import { Textarea, useDisclosure } from "@heroui/react";
 import TextInput from "@/components/inputs/Input";
 import Modal from "@/components/modals/Modal";
 import AddExerciseModal from "./components/AddExerciseModal";
 
-const page = () => {
+const ADDExercise = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [exercise, setExercise] = useState<Exercise>({
     name: "",
@@ -201,4 +201,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ADDExercise;
