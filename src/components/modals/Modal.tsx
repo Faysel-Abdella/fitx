@@ -10,15 +10,17 @@ const Modal = ({
   onOpenChange,
   children,
   radius,
+  background_color,
   modalWidthInPercent,
   paddingHorizontal = "px-6 py-0",
 }: {
   isOpen: boolean;
   onOpenChange: () => void;
   children: ReactNode;
-  modalWidthInPercent?: string;
+  background_color?: string;
   paddingHorizontal?: string;
   radius?:string
+  modalWidthInPercent?:string
 }) => {
   // const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
@@ -27,12 +29,12 @@ const Modal = ({
       onOpenChange={onOpenChange}
       className="rounded-none"
       classNames={{
-        base: modalWidthInPercent,
+        base: background_color,
         body: paddingHorizontal,
         closeButton: "hidden",
       }}
     >
-      <ModalContent className={`w-full ${radius} `}>
+      <ModalContent className={`w-full   ${radius} ${modalWidthInPercent} `}>
         {() => (
           <>
             <ModalBody>{children}</ModalBody>
