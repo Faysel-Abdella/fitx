@@ -11,7 +11,7 @@ const demo = [
   ];
   
   const row4Column1 = [
-    ...Array.from({ length: 70 }, (_, index) => ({
+    ...Array.from({ length: 70 }, () => ({
       ...demo[0],
       
     })),
