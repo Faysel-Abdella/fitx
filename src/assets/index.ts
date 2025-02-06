@@ -10,6 +10,8 @@ import trophy from "@/assets/icons/sidebar/trophy.svg";
 import trophyActive from "@/assets/icons/sidebar/trophy-active.svg";
 import memberActive from "@/assets/icons/sidebar/member-active.svg";
 import member from "@/assets/icons/sidebar/member.svg";
+import leftArrow from "@/assets/icons/leftArrow.svg";
+import rightArrow from "@/assets/icons/rightArrow.svg";
 
 import redbg from "@/assets/redbg.png";
 
@@ -27,6 +29,8 @@ const assets = {
   trophy,
   trophyActive,
   redbg,
+  rightArrow,
+  leftArrow,
 };
 
 export default assets;

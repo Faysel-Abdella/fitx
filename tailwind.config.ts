@@ -16,6 +16,7 @@ export default {
         foreground: "var(--foreground)",
         mainGray: "#A1A1A1",
         mainBlue: "#006BFF",
+        grayText: "#A0A0A0",
       },
     },
   },

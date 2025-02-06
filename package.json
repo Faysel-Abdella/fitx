@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",
-    "framer-motion": "^12.0.8",
+    "@nextui-org/react": "^2.6.11",
+    "framer-motion": "^12.0.11",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
