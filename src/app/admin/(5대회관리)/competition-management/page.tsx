@@ -1,7 +1,12 @@
 import React from "react";
+import TopContent from "./components/TopContent";
+import DataTable from "./components/DataTable";
 
 const CompetitionManagement = () => {
-  return <div>CompetitionManagement</div>;
+  return <div>
+    <TopContent/>
+    <DataTable/>
+  </div>;
 };
 
 export default CompetitionManagement;
