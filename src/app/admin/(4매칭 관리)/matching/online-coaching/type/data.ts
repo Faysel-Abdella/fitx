@@ -103,7 +103,7 @@ export const sampleData: UserData[] = [
   },
 ]
 
-export const columns: TableColumn[] = [
+export const  columns: TableColumn<UserData>[] = [
   { key: "id", header: "번호", width: "80px" },
   { key: "name", header: "이름" },
   { key: "phone", header: "휴대전화번호" },

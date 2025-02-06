@@ -1,10 +1,10 @@
 import type React from "react"
 
-export interface TableColumn {
-  key: string
+export interface TableColumn<T> {
+  key: keyof T
   header: string
   width?: string
-  render?: (value: any, row: any) => React.ReactNode
+  render?: (value: T[keyof T], row: T) => React.ReactNode
 }
 
 export interface UserData {

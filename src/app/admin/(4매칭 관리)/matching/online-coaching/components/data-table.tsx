@@ -10,7 +10,7 @@ import ModalContent from "./ModalContent";
 
 interface DataTableProps {
   data: UserData[];
-  columns: TableColumn[];
+ columns: TableColumn<UserData>[];
   totalItems?: number;
   onApprove?: (id: number) => void;
   onReject?: (id: number) => void;
