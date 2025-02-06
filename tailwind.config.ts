@@ -15,6 +15,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         mainGray: "#A1A1A1",
+        textBlack: "#4D4D4D",
         mainBlue: "#006BFF",
         grayText: "#A0A0A0",
       },
