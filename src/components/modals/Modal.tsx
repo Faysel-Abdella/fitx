@@ -34,7 +34,10 @@ const Modal = ({
         closeButton: "hidden",
       }}
     >
-      <ModalContent className={`w-full   ${radius} ${modalWidthInPercent} `}>
+      <ModalContent className={`w-full   ${radius} ${modalWidthInPercent} `}
+      
+      
+      >
         {() => (
           <>
             <ModalBody>{children}</ModalBody>
