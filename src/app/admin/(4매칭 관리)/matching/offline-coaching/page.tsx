@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const OfflineCoaching = () => {
-  return <div>OfflineCoaching</div>;
-};
+const page = () => {
+  return (
+    <div>page</div>
+  )
+}
 
-export default OfflineCoaching;
+export default page
