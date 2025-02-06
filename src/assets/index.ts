@@ -12,6 +12,8 @@ import memberActive from "@/assets/icons/sidebar/member-active.svg";
 import member from "@/assets/icons/sidebar/member.svg";
 import leftArrow from "@/assets/icons/leftArrow.svg";
 import rightArrow from "@/assets/icons/rightArrow.svg";
+import myGym from "@/assets/images/meGym.png";
+import audio from "@/assets/images/audio.png";
 
 import redbg from "@/assets/redbg.png";
 
@@ -31,6 +33,8 @@ const assets = {
   redbg,
   rightArrow,
   leftArrow,
+  myGym,
+  audio,
 };
 
 export default assets;
