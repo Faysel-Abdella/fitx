@@ -1,7 +1,17 @@
 import React from "react";
+import TopContent from "./components/TopContent";
+import ShowTable from "./components/showTable";
 
-const OnlineCoaching = () => {
-  return <div>OnlineCoaching</div>;
+const OfflineCoaching = () => {
+  return (
+    <>
+      <div className="mb-5">
+        <TopContent />
+      </div>
+      <div> <ShowTable/></div>
+     
+    </>
+  );
 };
 
-export default OnlineCoaching;
+export default OfflineCoaching;
