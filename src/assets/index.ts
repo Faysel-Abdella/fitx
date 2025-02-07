@@ -14,6 +14,7 @@ import leftArrow from "@/assets/icons/leftArrow.svg";
 import rightArrow from "@/assets/icons/rightArrow.svg";
 import myGym from "@/assets/images/meGym.png";
 import audio from "@/assets/images/audio.png";
+import contact from "@/assets/images/Contact.png";
 
 import redbg from "@/assets/redbg.png";
 
@@ -35,6 +36,7 @@ const assets = {
   leftArrow,
   myGym,
   audio,
+  contact,
 };
 
 export default assets;
