@@ -5,9 +5,9 @@ import type { TableProps } from "@/app/admin/(3운동 프로그램 관리)/exerc
 
 export function DataTable<T extends { id: number | string }>({ columns, data, className = "" }: TableProps<T>) {
   return (
-    <div className={`overflow-hidden rounded-lg ${className}`}>
-      <div className="overflow-x-auto">
-        <table className="w-full divide-y divide-gray-200">
+    <div className={` w-full overflow-hidden rounded-lg ${className}`}>
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               {columns.map((column) => (

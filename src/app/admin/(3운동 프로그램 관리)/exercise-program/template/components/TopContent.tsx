@@ -34,6 +34,7 @@ const TopContent = () => {
               title="Plan"
               selectStyles="w-[215px] bg-white"
               titleStyles="min-w-[41px] text-[#4D4D4D] font-bold"
+              insideStyles="bg-white hover:bg-white"
             />
             <DropDownWithLabel
               options={Options2}
