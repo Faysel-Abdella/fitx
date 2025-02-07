@@ -1,16 +1,30 @@
 "use client";
 
-import { Progress } from "@heroui/react";
+import ProfilePreview from "@/components/ProfilePreview";
+import { Card, CardBody, Progress } from "@heroui/react";
 import { Ellipsis } from "lucide-react";
+import image from "../../../../assets/Profile.svg";
 import { NutritionCircle } from "./NutritionCircle";
 
 export const ColumnOne = () => {
   return (
     <div className="h-full ">
-      <div className="bg-white p-15 mb-5">this component will come</div>
+      <Card>
+        <CardBody className="p-4">
+          <ProfilePreview
+            imageSrc={image}
+            name="Jane Doe"
+            stats={[
+              { label: "Workouts", weight: "12" },
+              { label: "e1RM", weight: "150kg" },
+              { label: "Sessions", weight: "8" },
+            ]}
+          />
+        </CardBody>
+      </Card>
 
       {/* Available Days Section */}
-      <div className="text-base text-[#4D4D4D] font-bold mb-3">
+      <div className="text-base text-[#4D4D4D] font-bold my-6">
         운동 가능 요일
       </div>
 
