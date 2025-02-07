@@ -12,9 +12,9 @@ const TopContent = () => {
           type="text"
           label="회원명"
           labelColor="text-[#323232] font-bold"
-          containerStyle="w-[280px] "
+          
           labelWidth="w-[60px]"
-          inputWrapper="border-1 rounded-[5px] border-[#DCDCDC] bg-white"
+          inputWrapper="border-1 rounded-[5px] w-[280px] border-[#DCDCDC] bg-white"
          
           
         />
