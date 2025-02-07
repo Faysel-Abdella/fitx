@@ -97,6 +97,7 @@ const AddExercise = () => {
                       <input
                         type="text"
                         value={set.reps}
+                        placeholder="4"
                         onChange={(e) =>
                           updateSet(set.id, "reps", e.target.value)
                         }
@@ -107,6 +108,7 @@ const AddExercise = () => {
                       <input
                         type="text"
                         value={set.rpe}
+                        placeholder="7"
                         onChange={(e) =>
                           updateSet(set.id, "rpe", e.target.value)
                         }
@@ -117,6 +119,7 @@ const AddExercise = () => {
                       <input
                         type="text"
                         value={set.weight}
+                        placeholder="80Kg"
                         onChange={(e) =>
                           updateSet(set.id, "weight", e.target.value)
                         }
@@ -127,9 +130,12 @@ const AddExercise = () => {
                       <input
                         type="text"
                         value={set.rest}
+                
+
                         onChange={(e) =>
                           updateSet(set.id, "rest", e.target.value)
                         }
+                        placeholder="2"
                         className="w-full px-[20px] py-[11px] h-[67px] bg-[#F5F5F5] border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </td>
