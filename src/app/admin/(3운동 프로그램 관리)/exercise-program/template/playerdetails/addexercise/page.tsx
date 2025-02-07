@@ -55,7 +55,7 @@ const ADDExercise = () => {
   return (
     <div>
       <Header title="운동 추가하기" />
-      <div className="max-w-3xl mx-auto p-4">
+      <div className="w-[60%] mx-auto p-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Exercise Selection Input */}
           <div className="w-full py-[15px] bg-white rounded-[100px] flex justify-center items-center">
@@ -177,6 +177,7 @@ const ADDExercise = () => {
                 inputWrapper: "bg-white",
               }}
             />
+            <p className="text-[#A1A1A1] text-xs text-end">0 / 50</p>
           </div>
           <div className="flex flex-col gap-2 mt-5">
             <p className="font-bold text-[#4D4D4D] text-xs">코멘트 (선택)</p>

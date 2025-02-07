@@ -12,7 +12,7 @@ interface ProfilePreviewProps {
 
 const ProfilePreview = ({ imageSrc, name, stats }: ProfilePreviewProps) => {
   return (
-    <div className="flex w-fit gap-[14px] p-[14px] rounded-[10px] bg-white">
+    <div className="flex items-center w-fit gap-[14px] p-[14px] rounded-[10px] bg-white">
      
       <div className="flex flex-col gap-2 items-center">
         <Image
