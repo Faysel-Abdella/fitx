@@ -14,13 +14,13 @@ const DropDown = ({
 }) => {
   return (
     <div className="flex items-center">
-      <div>
+      <div className="">
         <Select
           classNames={{
             mainWrapper: [
               `${selectStyles} border-1 border-[#D2D5D6]  rounded-[5px] text-mainGray`,
             ],
-            trigger: [`${insideStyles}  bg-[#ffffff] `],
+            trigger: [`${insideStyles}   bg-[#ffffff] rounded-[5px] `],
             value: ["text-[15px] "],
           }}
           disallowEmptySelection={true}

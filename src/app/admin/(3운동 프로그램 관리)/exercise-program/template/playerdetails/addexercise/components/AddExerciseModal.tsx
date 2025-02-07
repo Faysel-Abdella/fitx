@@ -10,13 +10,13 @@ const AddExerciseModal = ({cancel}:addexerciseProps) => {
         router.push('/admin/exercise-program/template/playerdetails/addexercise/addexercise')
     }
   return (
-    <div className="flex flex-col gap-5 rounded-[10px] p-5">
+    <div className="flex flex-col gap-5 rounded-[10px]   p-5">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-lg text-[#4D4D4D]">템플릿 선택</p>
         <button onClick={cancel} className="text-[#4D4D4D] text-lg font-bold">X</button>
       </div>
 
-      <div className="flex flex-col mt-[20px]">
+      <div className="flex flex-col ">
         <div className=" flex gap-[20px]">
           <Template title="스쿼트" />
           <Template title="데드리프트" />

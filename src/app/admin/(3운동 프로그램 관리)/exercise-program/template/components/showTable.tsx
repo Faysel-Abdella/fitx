@@ -86,11 +86,11 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="min-w-full mx-auto p-4">
       <div className="mb-4 flex justify-between items-center">
         <h2 className="text-lg font-medium">총 {users.length}명</h2>
         <select
-          className="p-2 border rounded-lg"
+          className="p-2 border-1 border-[#DCDCDC] bg-white  rounded-lg"
           value={rowsPerPage}
           onChange={handleRowsPerPageChange}
         >
