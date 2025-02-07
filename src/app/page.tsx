@@ -1,13 +1,28 @@
-'use client'
+"use client";
+import { useState } from "react";
 import logo from "@/app/assets/Logo.svg";
-
 import Image from "next/image";
 import TextInput from "@/components/inputs/Input";
+import { useDisclosure } from "@heroui/react";
+import Modal from "@/components/modals/Modal";
+import FindIdModal from "@/components/modals/loginModals/FindIdModal";
+// import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
 
 const LoginPage = () => {
+  const [modalType, setModalType] = useState<"findId" | "findPassword" | null>(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const openModal = (type: "findId" | "findPassword") => {
+    setModalType(type);
+    onOpen();
+  };
+
   return (
-    <div className="flex items-center justify-center h-screen  bg-white">
-      <div className="w-full max-w-md bg-white   p-8">
+    <div className="flex items-center justify-center h-screen bg-white">
+      <div className="w-full max-w-md bg-white p-8">
         {/* Logo */}
         <div className="flex flex-col items-center mb-6">
           <Image src={logo} alt="Logo" width={130} height={30} />
@@ -24,55 +39,60 @@ const LoginPage = () => {
         <form>
           {/* Email Field */}
           <div className="mb-4 w-full">
-            <label
-              htmlFor="id"
-              className="block text-sm font-normal text-[#333333] mb-3"
-            >
+            <label className="block text-sm font-normal text-[#333333] mb-3">
               아이디<span className="text-[#FF0000]">*</span>
             </label>
             <TextInput
-              type="id"
-              containerStyle="bg-white border-1 border-[#D9D9D9] rounded-[10px]"
+              type="text"
+              containerStyle=" border border-[#D9D9D9] rounded-[10px]"
               placeholder="아이디를 입력해주세요."
+              inputWrapper="bg-white"
             />
           </div>
 
           {/* Password Field */}
           <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-normal  text-[#333333] mb-3"
-            >
+            <label className="block text-sm font-normal text-[#333333] mb-3">
               비밀번호<span className="text-[#FF0000]">*</span>
             </label>
-            <div className="flex items-center bg-white border-1 border-[#D9D9D9] rounded-[10px]">
+            <div className="flex items-center bg-white border border-[#D9D9D9] rounded-[10px] px-3">
               <TextInput
-                type="password"
-                containerStyle=" bg-white border-1 border-[#D9D9D9] rounded-[10px]"
+                type={showPassword ? "text" : "password"}
+                containerStyle="flex-1  border-none"
                 placeholder="비밀번호를 입력해주세요."
+                inputWrapper="bg-white"
               />
-              {/* <button>
-                <Image src={eye.src} alt="" width={18} height={12}/>
-              </button> */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="text-gray-500"
+              >
+                {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+              </button>
             </div>
           </div>
 
           {/* Login Button */}
           <div className="flex justify-center mt-[41px]">
-            <button
-              type="submit"
-              className=" w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg "
-            >
+            <button className="w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg">
               로그인
             </button>
           </div>
-          <div className="flex flex-col justify-center mt-4">
-            <p className="text-[#006BFF] text-center">
-              회원가입 ID 찾기 비밀번호 찾기
-            </p>
+
+          {/* Links */}
+          <div className="flex justify-center mt-4 space-x-4 text-[#006BFF] text-sm">
+          <button type="button" onClick={()=>{}}>회원가입</button>
+            <button type="button" onClick={() => openModal("findId")}>ID 찾기</button>
+            <button type="button" onClick={() => openModal("findPassword")}>비밀번호 찾기</button>
           </div>
         </form>
       </div>
+
+      {/* Modals */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        {modalType === "findId" && <FindIdModal />}
+        {modalType === "findPassword" && <FindPasswordModal />}
+      </Modal>
     </div>
   );
 };
