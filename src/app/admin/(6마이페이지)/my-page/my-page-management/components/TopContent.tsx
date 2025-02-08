@@ -2,15 +2,10 @@
 import DropDown from "@/components/dropDown/DropDown";
 import Header from "@/components/Header";
 import TextInput from "@/components/inputs/Input";
-import { div } from "framer-motion/client";
+
 import Image from "next/image";
 import React from "react";
 
-const Options = [
-  { key: "1", label: "여성" },
-  { key: "2", label: "여성" },
-  { key: "3", label: "여성" },
-];
 const Options2 = [
   { key: "1", label: "대한민국" },
   { key: "2", label: "대한민국" },
