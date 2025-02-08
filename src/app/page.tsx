@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import logo from "@/app/assets/Logo.svg";
 
 import Image from "next/image";
 import TextInput from "@/components/inputs/Input";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -59,12 +60,14 @@ const LoginPage = () => {
 
           {/* Login Button */}
           <div className="flex justify-center mt-[41px]">
-            <button
-              type="submit"
-              className=" w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg "
-            >
-              로그인
-            </button>
+            <Link href="/admin/player-management">
+              <button
+                type="button"
+                className="w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg"
+              >
+                로그인
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col justify-center mt-4">
             <p className="text-[#006BFF] text-center">

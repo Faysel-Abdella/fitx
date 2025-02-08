@@ -1,7 +1,7 @@
 "use client";
-
-import { Card, CardBody } from "@heroui/card";
+import ProfilePreview from "@/components/ProfilePreview";
 import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
 import {
   ChevronLeft,
   ChevronRight,
@@ -9,6 +9,8 @@ import {
   Video,
 } from "lucide-react";
 import { useState } from "react";
+
+import image from "../../../../assets/Profile.svg";
 
 // Dummy data for missing arrays
 const weekDays: string[] = ["월", "화", "수", "목", "금", "토", "일"];
@@ -81,24 +83,43 @@ export default function Scheduler() {
 
   return (
     <div className="h-full ">
-      <div className="bg-white p-20 mb-5">this component will come</div>
-
+      <Card>
+        <CardBody className="p-4">
+          <ProfilePreview
+            imageSrc={image}
+            name="Jane Doe"
+            stats={[
+              { label: "Workouts", weight: "12" },
+              { label: "e1RM", weight: "150kg" },
+              { label: "Sessions", weight: "8" },
+            ]}
+          />
+        </CardBody>
+      </Card>
       {/* Available Days Section */}
-      <div className="text-base text-[#4D4D4D] font-bold mb-3">
+      <div className="text-base text-[#4D4D4D] font-bold my-6">
         운동 가능 요일
       </div>
 
       <Card className="mb-4">
         <CardBody className="p-4">
           <div className="flex justify-between px-4">
-            {weekDays.map((day, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(34,184,146,0.1)] text-[rgb(34,184,146)] text-sm font-medium transition-colors duration-200 hover:bg-[rgba(34,184,146,0.2)]"
-              >
-                {day}
-              </div>
-            ))}
+            {weekDays.map((day, index) => {
+              // Adjust this condition to fit your active/inactive criteria
+              const isActive = index % 2 === 0;
+              return (
+                <div
+                  key={index}
+                  className={`flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[rgba(34,184,146,0.1)] text-[rgb(34,184,146)] hover:bg-[rgba(34,184,146,0.2)]"
+                      : " text-[#A1A1A1] hover:bg-gray-200"
+                  }`}
+                >
+                  {day}
+                </div>
+              );
+            })}
           </div>
         </CardBody>
       </Card>
