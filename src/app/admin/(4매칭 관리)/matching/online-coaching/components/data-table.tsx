@@ -61,6 +61,7 @@ export function DataTable({
             options={Option}
             defaultSelectedKeys={Option[0].key}
             selectStyles="w-[124px] bg-white"
+            selectContainerStyles="w-full"
           />
           <select
             value={rowsPerPage}

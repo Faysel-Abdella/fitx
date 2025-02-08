@@ -8,22 +8,24 @@ const DropDownWithLabel = ({
   titleStyles,
   selectStyles,
   insideStyles,
+  selectContainerStyles,
 }: {
   title: string;
   options: { key: string; label: string }[];
   defaultSelectedKeys: string;
   titleStyles?: string;
   selectStyles?: string;
+  selectContainerStyles?:string
   insideStyles?: string;
 }) => {
   return (
-    <div className="flex items-center">
+    <div className={`flex ${selectContainerStyles}  items-center`}>
       <h4
         className={`${titleStyles}  text-mainBlack mr-4 text-base text-nowrap`}
       >
         {title}
       </h4>
-      <div className=" ">
+      <div className={`${selectContainerStyles}`}>
         <Select
           classNames={{
             mainWrapper: [
