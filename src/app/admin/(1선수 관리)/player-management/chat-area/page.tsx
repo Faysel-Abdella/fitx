@@ -9,13 +9,13 @@ const ChatArea = () => {
     <section>
       <Header title="피드백" />
       <div className="flex gap-6 mt-8 items-stretch">
-        <div className="w-[30%] flex-1 ">
+        <div className="">
           <Scheduler />
         </div>
         <div>
           <WorkoutCard />
         </div>
-        <div className="w-[70%] flex-1">
+        <div className="flex-1">
           <ChatInterface />
         </div>
       </div>

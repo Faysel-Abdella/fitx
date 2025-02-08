@@ -35,7 +35,10 @@ export default function StatusIndicator({
             "border-[2px] border-[#006BFF] text-[#006BFF] bg-transparent"
           }
           ${variant === "active" && "bg-[#006BFF] text-white"}
-          ${variant === "text-only" && "bg-inherit text-[#D1D1D1] text-xl"}
+          ${
+            variant === "text-only" &&
+            "bg-inherit text-[#D1D1D1] font-semibold text-lg"
+          }
         `}
       >
         {content}

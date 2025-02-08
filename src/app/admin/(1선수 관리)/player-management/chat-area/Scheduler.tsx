@@ -1,7 +1,7 @@
 "use client";
-
-import { Card, CardBody } from "@heroui/card";
+import ProfilePreview from "@/components/ProfilePreviewNew";
 import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
 import {
   ChevronLeft,
   ChevronRight,
@@ -9,11 +9,53 @@ import {
   Video,
 } from "lucide-react";
 import { useState } from "react";
-import ProfilePreview from "@/components/ProfilePreview";
+
 import image from "../../../../assets/Profile.svg";
 
-// Dummy data for missing arrays
-const weekDays: string[] = ["월", "화", "수", "목", "금", "토", "일"];
+const scores = [
+  { score: 5, total: 5, label: "근본틱" },
+  { score: 4, total: 5, label: "스트레스" },
+  { score: 1, total: 5, label: "에너지" },
+  { score: 3, total: 5, label: "기분" },
+  { score: 5, total: 5, label: "수면" },
+  { score: 5, total: 5, label: "피로도" },
+];
+
+const sets2 = [
+  {
+    label: "1세트",
+    hasVideo: false,
+    hasChat: false,
+    hasIndicator: false,
+  },
+  {
+    label: "2세트",
+    hasVideo: true,
+    hasChat: false,
+    hasIndicator: true,
+  },
+];
+
+const sets = [
+  {
+    label: "1세트",
+    hasVideo: true,
+    hasChat: true,
+    hasIndicator: true,
+  },
+  {
+    label: "2세트",
+    hasVideo: false,
+    hasChat: false,
+    hasIndicator: false,
+  },
+  {
+    label: "3세트",
+    hasVideo: true,
+    hasChat: false,
+    hasIndicator: true,
+  },
+];
 
 export default function Scheduler() {
   const [activeDate, setActiveDate] = useState(new Date());
@@ -36,85 +78,56 @@ export default function Scheduler() {
   // Calculate week number (basic version)
   const weekNumber = Math.ceil(activeDate.getDate() / 7);
 
-  const scores = [
-    { score: 5, total: 5, label: "근본틱" },
-    { score: 4, total: 5, label: "스트레스" },
-    { score: 1, total: 5, label: "에너지" },
-    { score: 3, total: 5, label: "기분" },
-    { score: 5, total: 5, label: "수면" },
-    { score: 5, total: 5, label: "피로도" },
-  ];
+  // for the seven days
+  const weekDays = ["월", "화", "수", "목", "금", "토", "일"];
+  const [activeDays, setActiveDays] = useState<number[]>([]);
 
-  const sets2 = [
-    {
-      label: "1세트",
-      hasVideo: false,
-      hasChat: false,
-      hasIndicator: false,
-    },
-    {
-      label: "2세트",
-      hasVideo: true,
-      hasChat: false,
-      hasIndicator: true,
-    },
-  ];
-
-  const sets = [
-    {
-      label: "1세트",
-      hasVideo: true,
-      hasChat: true,
-      hasIndicator: true,
-    },
-    {
-      label: "2세트",
-      hasVideo: false,
-      hasChat: false,
-      hasIndicator: false,
-    },
-    {
-      label: "3세트",
-      hasVideo: true,
-      hasChat: false,
-      hasIndicator: true,
-    },
-  ];
+  const handleDayClick = (index: number) => {
+    setActiveDays((prevActiveDays) => {
+      // Check if the index is already active
+      if (prevActiveDays.includes(index)) {
+        // If active, remove it from the array
+        return prevActiveDays.filter((dayIndex) => dayIndex !== index);
+      } else {
+        // If inactive, add it to the array
+        return [...prevActiveDays, index];
+      }
+    });
+  };
 
   return (
     <div className="h-full ">
-      <Card>
-        <CardBody className="py-4 px-1">
+      <Card className="">
+        <CardBody>
           <ProfilePreview
             imageSrc={image}
-            name="Jane Doe"
+            name="이재은 선수"
             stats={[
-              { label: "Workouts", weight: "12" },
-              { label: "e1RM", weight: "150kg" },
-              { label: "Sessions", weight: "8" },
+              { label: "스쿼트", weight: "280Kg" },
+              { label: "벤치프레스", weight: "180Kg" },
+              { label: "데드리프트", weight: "329Kg" },
             ]}
           />
         </CardBody>
       </Card>
-
       {/* Available Days Section */}
-      <div className="text-base text-[#4D4D4D] font-bold my-6">
+      <div className="text-base text-[#4D4D4D] font-bold my-5">
         운동 가능 요일
       </div>
 
       <Card className="mb-4">
         <CardBody className="p-4">
-          <div className="flex justify-between px-4">
+          <div className="flex justify-between px-8">
             {weekDays.map((day, index) => {
-              // Adjust this condition to fit your active/inactive criteria
-              const isActive = index % 2 === 0;
+              const isActive = activeDays.includes(index);
               return (
                 <div
                   key={index}
-                  className={`flex cursor-pointer items-center justify-center w-7 h-7 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  onClick={() => handleDayClick(index)}
+                  className={`flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer ${
                     isActive
                       ? "bg-[rgba(34,184,146,0.1)] text-[rgb(34,184,146)] hover:bg-[rgba(34,184,146,0.2)]"
-                      : " text-[#A1A1A1] hover:bg-gray-200"
+                      : "text-[#A1A1A1] hover:bg-gray-200"
                   }`}
                 >
                   {day}
@@ -128,13 +141,14 @@ export default function Scheduler() {
       {/* Weekly Calendar Section */}
       <Card>
         <CardBody className="p-4">
-          <div className="text-base text-[#4D4D4D] font-bold">주차 운동</div>
+          <div className="text-base text-[#4D4D4D] mb-1 font-bold">
+            주차 운동
+          </div>
           <div className="flex justify-between items-center">
             <Button
               isIconOnly
-              size="lg"
               variant="light"
-              className="min-w-0"
+              className="p-1 bg-[#F5F5F5]"
               onClick={() => changeDay(-1)}
             >
               <ChevronLeft className="h-6 w-6" />
@@ -145,9 +159,8 @@ export default function Scheduler() {
             </span>
             <Button
               isIconOnly
-              size="lg"
               variant="light"
-              className="min-w-0"
+              className="p-1 bg-[#F5F5F5]"
               onClick={() => changeDay(1)}
             >
               <ChevronRight className="h-6 w-6" />
@@ -173,7 +186,7 @@ export default function Scheduler() {
                   </span>
                   {/* Circular Date Container */}
                   <div
-                    className={`h-[30px] w-[30px] flex items-center justify-center rounded-full mt-1 ${
+                    className={`h-[30px] w-[30px] cursor-pointer hover:bg-[#F5F5F5]  flex items-center justify-center rounded-full mt-1 ${
                       isActive
                         ? "bg-mainBlue text-white border border-mainBlue"
                         : "bg-white text-[#767676]"
@@ -214,15 +227,15 @@ export default function Scheduler() {
           {/* last parts */}
 
           <div className=" bg-[#F5F5F5] rounded-lg px-5 py-4 space-y-2">
-            <div className="flex items-center justify-between px-4 py-3 mb-3 border-b  border-[#D1D1D1]   relative">
+            <div className="flex items-center justify-between py-3 mb-3 border-b  border-[#D1D1D1]   relative">
               <div className="flex items-center gap-2">
                 <span className="text-[#4D4D4D] text-sm font-medium">
                   스쿼트
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <Video className="w-5 h-4 text-[#A1A1A1]" />
+                  <Video className="w-6 h-5 text-[#A1A1A1]" />
 
-                  <MessageCircleMore className="w-5 h-4 text-[#A1A1A1]" />
+                  <MessageCircleMore className="w-6 h-5 text-[#A1A1A1]" />
                 </div>
               </div>
 
@@ -239,10 +252,10 @@ export default function Scheduler() {
                   </span>
                   <div className="flex items-center gap-1.5">
                     {set.hasVideo && (
-                      <Video className="w-5 h-4 text-[#A1A1A1]" />
+                      <Video className="w-6 h-5 text-[#A1A1A1]" />
                     )}
                     {set.hasChat && (
-                      <MessageCircleMore className="w-5 h-4 text-[#A1A1A1]" />
+                      <MessageCircleMore className="w-6 h-5 text-[#A1A1A1]" />
                     )}
                   </div>
                 </div>
@@ -253,7 +266,7 @@ export default function Scheduler() {
             ))}
           </div>
           <div className=" bg-[#F5F5F5] rounded-lg px-5 py-4 my-6 space-y-2">
-            <div className=" px-4 py-3 mb-3 border-b  border-[#D1D1D1]">
+            <div className=" py-3 mb-3 border-b  border-[#D1D1D1]">
               <span className="text-[#4D4D4D] text-base ">데드리프트</span>
             </div>
             {sets2.map((set, index) => (
@@ -267,10 +280,10 @@ export default function Scheduler() {
                   </span>
                   <div className="flex items-center gap-1.5">
                     {set.hasVideo && (
-                      <Video className="w-5 h-4 text-[#A1A1A1]" />
+                      <Video className="w-6 h-5 text-[#A1A1A1]" />
                     )}
                     {set.hasChat && (
-                      <MessageCircleMore className="w-5 h-4 text-[#A1A1A1]" />
+                      <MessageCircleMore className="w-6 h-5 text-[#A1A1A1]" />
                     )}
                   </div>
                 </div>

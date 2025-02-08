@@ -1,12 +1,13 @@
 "use client";
 import contact from "@/assets/images/Contact.png";
 import { Card } from "@heroui/card";
-import { MessageSquare, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import image from "@/assets/icons/MessageIcon.svg";
 
-import ChatInterface from "./chatInterface";
 import Header from "@/components/Header";
+import ChatInterface from "./chatInterface";
 
 const contacts = [
   {
@@ -104,7 +105,13 @@ const ChatArea = () => {
                   className="absolute bottom-10 right-6 h-12 w-12 rounded-full bg-mainBlue hover:bg-blue-700 flex items-center justify-center shadow-lg transition-colors"
                   aria-label="Open chat"
                 >
-                  <MessageSquare className="h-5 w-5 text-white" />
+                  <Image
+                    src={image}
+                    alt="Message Icon"
+                    className="text-white"
+                    width={20}
+                    height={20}
+                  />
                 </button>
               </div>
             </div>

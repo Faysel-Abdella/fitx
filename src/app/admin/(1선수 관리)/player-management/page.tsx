@@ -11,10 +11,11 @@ import {
 } from "@heroui/react";
 import React, { useState, useMemo } from "react";
 import StatusIndicator from "./Badge";
-import rowOneTableData from "@/data/tables/rowOneTableData";
+import rowOneTableData from "@/app/admin/(1선수 관리)/player-management/rowOneTableData";
 import Link from "next/link";
 import Header from "@/components/Header";
 import { HeaderArea } from "./header";
+import DropDown from "@/components/dropDown/DropDown";
 
 // Define the status type (if not already defined)
 type StatusVariant =
@@ -64,17 +65,29 @@ const PlayerManagement = () => {
       <Header title="관리 회원 리스트" />
       <HeaderArea />
 
-      <main className="mt-6 rounded-[20px] bg-white px-5 py-6">
+      <main className="mt-8 rounded-[20px] bg-white px-5 py-6">
+        <div className="flex justify-between px-3">
+          <p className="text-[#4D4D4D]  font-bold">총 00명</p>
+          <DropDown
+            options={[
+              { key: "total", label: "총 00명" },
+              { key: "active", label: "활성 회원" },
+              { key: "inactive", label: "비활성 회원" },
+            ]}
+            defaultSelectedKeys="total"
+            insideStyles=" w-[128px] h-[40px]  "
+          />
+        </div>
         <article>
           <Table
             aria-label="Data Table"
             shadow="none"
             classNames={{
               th: [
-                "font-normal text-[16px] bg-[#EEEEEE] text-[#A1A9A3] h-[48px] text-center",
+                "font-normal text-[16px] bg-[#EEEEEE] text-[#A1A9A3] h-[50px] text-center",
               ],
               td: [
-                "px-6 py-3 text-center font-normal text-base text-[#363941]",
+                "px-6 text-center font-normal h-[64] text-base text-[#363941]",
               ],
             }}
             bottomContent={

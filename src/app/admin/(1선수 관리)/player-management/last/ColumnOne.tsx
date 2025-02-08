@@ -1,6 +1,6 @@
 "use client";
 
-import ProfilePreview from "@/components/ProfilePreview";
+import ProfilePreview from "@/components/ProfilePreviewNew";
 import { Card, CardBody, Progress } from "@heroui/react";
 import { Ellipsis } from "lucide-react";
 import image from "../../../../assets/Profile.svg";
@@ -13,20 +13,18 @@ export const ColumnOne = () => {
         <CardBody className="p-4">
           <ProfilePreview
             imageSrc={image}
-            name="Jane Doe"
+            name="이재은 선수"
             stats={[
-              { label: "Workouts", weight: "12" },
-              { label: "e1RM", weight: "150kg" },
-              { label: "Sessions", weight: "8" },
+              { label: "스쿼트", weight: "280Kg" },
+              { label: "벤치프레스", weight: "180Kg" },
+              { label: "데드리프트", weight: "329Kg" },
             ]}
           />
         </CardBody>
       </Card>
 
       {/* Available Days Section */}
-      <div className="text-base text-[#4D4D4D] font-bold my-6">
-        운동 가능 요일
-      </div>
+      <div className="text-xl text-[#4D4D4D] font-bold my-3">식단</div>
 
       {/* Weekly Calendar Section */}
 

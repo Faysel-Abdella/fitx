@@ -7,7 +7,7 @@ const Table = () => {
   ];
 
   return (
-    <div className="rounded-md bg-[#F5F5F5] pb-12 pt-3 px-5 ml-[12rem] mr-12 overflow-hidden">
+    <div className="rounded-md bg-[#F5F5F5] pb-12 pt-3 px-5 ml-[7rem] mr-12 overflow-hidden">
       {/* Header Row */}
       <div className="flex font-medium text-sm bg-[#F5F5F5]">
         {headers.map((header, idx) => (

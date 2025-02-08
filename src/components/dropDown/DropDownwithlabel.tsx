@@ -15,7 +15,7 @@ const DropDownWithLabel = ({
   defaultSelectedKeys: string;
   titleStyles?: string;
   selectStyles?: string;
-  selectContainerStyles?:string
+  selectContainerStyles?: string;
   insideStyles?: string;
 }) => {
   return (
@@ -29,10 +29,10 @@ const DropDownWithLabel = ({
         <Select
           classNames={{
             mainWrapper: [
-              `${selectStyles} border-1 border-[#D2D5D6]  rounded-[5px] text-mainGray`,
+              `${selectStyles} border-1 border-[#D2D5D6]  rounded-[5px] `,
             ],
             trigger: [`${insideStyles}  bg-[#ffffff] rounded-[5px] `],
-            value: ["text-[15px] "],
+            value: ["text-[15px]"],
           }}
           disallowEmptySelection={true}
           defaultSelectedKeys={[defaultSelectedKeys]}

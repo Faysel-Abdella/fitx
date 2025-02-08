@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import MessageInput from "./MessageInput";
-import { SimpleVideo } from "./SimpleVideo";
 import VideoMessage from "./VideoMessage";
 
 // Dynamically import ReactPlayer to prevent SSR hydration issues
@@ -26,26 +25,31 @@ export default function ChatInterface() {
       <div className="flex-1 p-6 space-y-2">
         {/* User Messages */}
         <div className="flex justify-end">
-          <div className={`${chatBubbleStyles} bg-mainBlue text-white`}>
-            <p className="text-sm">오늘 운동 영상입니다.</p>
+          <div className={`${chatBubbleStyles}  bg-mainBlue text-white`}>
+            <p className="text-sm text-end">오늘 운동 영상입니다.</p>
           </div>
         </div>
         <div className="flex justify-end">
-          <div className={`${chatBubbleStyles} bg-mainBlue text-white`}>
-            <p className="text-sm">피드백 부탁드려요</p>
+          <div className={`${chatBubbleStyles}  bg-mainBlue text-white`}>
+            <p className="text-sm text-end">피드백 부탁드려요</p>
           </div>
         </div>
         <div className="flex justify-end">
           {/* Video Player */}
           <div className="w-[70%]">
-            <SimpleVideo />
+            <video controls className="w-full max-w-md rounded-lg">
+              <source src="/video/sample.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
 
         {/* Received Message */}
         <div className="flex items-start space-x-3">
           <div className="w-8 h-8 bg-gray-300 rounded-full" />
-          <div className={`${chatBubbleStyles} bg-[#141414] text-white`}>
+          <div
+            className={`${chatBubbleStyles} w-[70%] bg-[#141414] text-white`}
+          >
             <p className="text-sm">
               넷워크짐에 등록 주셔서 고마움 드리며 앞으로 늘 건강하시고,
               네트워크짐 안전 훈련하며 살아 늘 건강하자.
@@ -55,7 +59,7 @@ export default function ChatInterface() {
 
         {/* User Response */}
         <div className="flex justify-end">
-          <div className={`${chatBubbleStyles} bg-mainBlue text-white`}>
+          <div className={`${chatBubbleStyles} w-[70%] bg-mainBlue text-white`}>
             <p className="text-sm">
               알겠습니다. 더 안정적으로 유지하도록 하겠습니다.
             </p>
