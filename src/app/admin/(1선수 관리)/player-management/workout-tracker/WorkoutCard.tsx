@@ -1,13 +1,11 @@
 "use client";
 
 import { Button, Textarea } from "@heroui/react";
+import { SimpleVideo } from "./SimpleVideo";
 export default function WorkoutCard() {
   return (
     <div className="w-full max-w-md overflow-hidden">
-      <video controls className="w-full rounded-lg">
-        <source src="https://your-video-url.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <SimpleVideo />
 
       <div className="flex gap-3 my-5">
         <div className="bg-white flex-1 px-2 py-3 rounded-lg flex justify-center items-center">
