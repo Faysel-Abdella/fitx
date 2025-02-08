@@ -58,7 +58,7 @@ const DataTable = () => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
     return row4Column1.slice(start, end);
-  }, [page, row4Column1, viewValue, rowsPerPage]);
+  }, [page,  rowsPerPage]);
 
   // Selection Logi
   return (

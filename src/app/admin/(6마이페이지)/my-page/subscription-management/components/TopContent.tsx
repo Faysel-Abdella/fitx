@@ -17,7 +17,7 @@ const TopContent = () => {
   return (
     <div>
       <Header title="결제/구독/정산 관리" />
-      <div className=" py-5 px-10 bg-white rounded-[5px] ">
+      <div className=" mt-10 py-5 px-10 bg-white rounded-[5px] ">
         <p className="text-[#4D4D4D] font-bold">플랜/정산 관리</p>
         <div className="flex mt-5 justify-between items-center w-[50%]">
           <p className="text-lg text-[#2B2B2B] font-bold">플랜</p>

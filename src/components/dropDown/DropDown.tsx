@@ -6,15 +6,17 @@ const DropDown = ({
   defaultSelectedKeys,
   selectStyles,
   insideStyles,
+  selectContainerStyles,
 }: {
   options: { key: string; label: string }[];
   defaultSelectedKeys: string;
   selectStyles?: string;
+  selectContainerStyles?:string
   insideStyles?: string;
 }) => {
   return (
-    <div className="flex items-center">
-      <div className="">
+    <div className={`flex ${selectContainerStyles} items-center`}>
+      <div className={`${selectContainerStyles}`}>
         <Select
           classNames={{
             mainWrapper: [

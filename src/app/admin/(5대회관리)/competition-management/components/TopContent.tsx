@@ -12,11 +12,8 @@ const TopContent = () => {
           type="text"
           label="회원명"
           labelColor="text-[#323232] font-bold"
-          
           labelWidth="w-[60px]"
-          inputWrapper="border-1 rounded-[5px] w-[280px] border-[#DCDCDC] bg-white"
-         
-          
+          inputWrapper="border-1 rounded-[5px] w-[25%] border-[#DCDCDC] bg-white"
         />
         <button className="py-[10px] px-[20px] w-[181px] text-white bg-[#4D4D4D] rounded-[5px]">
           검색
