@@ -1,17 +1,13 @@
 "use client";
 
 import { Button, Textarea } from "@heroui/react";
+import { SimpleVideo } from "./SimpleVideo";
 export default function WorkoutCard() {
   return (
     <div className="w-full max-w-md overflow-hidden">
-      {/* Video Thumbnail Section */}
-      <video controls className="w-full rounded-lg">
-        <source src="https://your-video-url.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      {/* Exercise Details */}
+      <SimpleVideo />
 
-      <div className="flex  gap-3 my-5">
+      <div className="flex gap-3 my-5">
         <div className="bg-white flex-1 px-2 py-3 rounded-lg flex justify-center items-center">
           <p className="text-sm text-[#4D4D4D]">aRPE</p>
         </div>
@@ -22,15 +18,11 @@ export default function WorkoutCard() {
         </div>
       </div>
 
-      {/* Description */}
-
       <h3 className="text-xs font-bold my-3">선수 코멘트</h3>
-      <div className="text-xs h-[70px]  bg-white px-3 flex items-center   rounded-lg text-[#4D4D4D]">
+      <div className="text-xs h-[70px] bg-white px-3 flex items-center rounded-lg text-[#4D4D4D]">
         운동 중 엉덩이 만이 아래서 움직임을 멈추어지지 못했어요. 네비부터는 다시
         철저히 할꺼요
       </div>
-
-      {/* Feedback Section */}
 
       <h3 className="text-xs font-bold mt-3 mb-2">코치 피드백</h3>
 
@@ -41,9 +33,8 @@ export default function WorkoutCard() {
           input: "resize-y min-h-[100px]",
         }}
         variant="bordered"
-        className=" rounded-xl"
+        className="rounded-xl"
       />
-      {/* Move the counter outside the text area */}
       <div className="text-end p-1 text-xs text-[#4D4D4D]">0/50</div>
 
       <Button

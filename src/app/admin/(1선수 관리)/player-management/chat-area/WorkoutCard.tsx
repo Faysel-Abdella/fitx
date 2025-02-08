@@ -2,8 +2,11 @@
 
 import { Card, CardBody } from "@heroui/card";
 import { CircleAlert, MessageCircleMore } from "lucide-react";
+import { SimpleVideo } from "./SimpleVideo";
 
 export default function WorkoutCard() {
+  // Using a reliable sample video from Cloudinary
+
   return (
     <div>
       <Card className="w-[320px]">
@@ -14,10 +17,7 @@ export default function WorkoutCard() {
           </div>
 
           {/* Video Player */}
-          <video controls className="w-full rounded-lg">
-            <source src="https://your-video-url.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <SimpleVideo />
 
           {/* Chat Messages */}
           <div className="space-y-3 my-3">

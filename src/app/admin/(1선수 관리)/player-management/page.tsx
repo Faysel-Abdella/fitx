@@ -13,6 +13,8 @@ import React, { useState, useMemo } from "react";
 import StatusIndicator from "./Badge";
 import rowOneTableData from "@/data/tables/rowOneTableData";
 import Link from "next/link";
+import Header from "@/components/Header";
+import { HeaderArea } from "./header";
 
 // Define the status type (if not already defined)
 type StatusVariant =
@@ -59,7 +61,8 @@ const PlayerManagement = () => {
 
   return (
     <section className="font-noto">
-      <header className="my-32">{/* Header Components */}</header>
+      <Header title="관리 회원 리스트" />
+      <HeaderArea />
 
       <main className="mt-6 rounded-[20px] bg-white px-5 py-6">
         <article>
@@ -186,7 +189,9 @@ const PlayerManagement = () => {
                   </TableCell>
                   <TableCell>
                     <span className="text-[#006BFF] font-medium underline cursor-pointer">
-                      {row.viewDetails}
+                      <Link href="/admin/player-management/last">
+                        {row.viewDetails}
+                      </Link>
                     </span>
                   </TableCell>
                 </TableRow>

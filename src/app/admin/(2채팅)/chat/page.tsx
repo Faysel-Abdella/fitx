@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import ChatInterface from "./chatInterface";
+import Header from "@/components/Header";
 
 const contacts = [
   {
@@ -45,69 +46,73 @@ const contacts = [
 const ChatArea = () => {
   const [activeContact, setActiveContact] = useState<string | null>(null);
   return (
-    <div className="flex gap-12 mt-8 items-stretch">
-      {/* <div className="w-[30%] flex-1 "><Scheduler /></div> */}
-      <div className="w-[30%]  ">
-        <Card
-          className={`${
-            activeContact ? "h-full" : "h-[900px]"
-          } p-4 bg-white relative`}
-        >
-          <div className="flex flex-col gap-12 items-stretch justify-between">
-            <div className="flex-1">
-              <div className="relative mb-8">
-                <input
-                  placeholder="상세 검색"
-                  className="w-full pl-10 pr-4 py-3  rounded-lg  bg-gray-100 focus:outline-0"
-                />
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 cursor-pointer text-[#A1A1A1]" />
+    <div>
+      <Header title="채팅" />
+
+      <div className="flex gap-12 mt-8 items-stretch">
+        {/* <div className="w-[30%] flex-1 "><Scheduler /></div> */}
+        <div className="w-[30%]  ">
+          <Card
+            className={`${
+              activeContact ? "h-full" : "h-[900px]"
+            }  bg-white relative`}
+          >
+            <div className="flex flex-col gap-12 items-stretch justify-between">
+              <div className="flex-1">
+                <div className="relative m-4 mb-8">
+                  <input
+                    placeholder="상세 검색"
+                    className="w-full pl-10 pr-4 py-3  rounded-lg  bg-gray-100 focus:outline-0"
+                  />
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 cursor-pointer text-[#A1A1A1]" />
+                </div>
+
+                <div className="space-y-8">
+                  {contacts.map((person) => (
+                    <div
+                      key={person.id}
+                      onClick={() => setActiveContact(person.id)}
+                      className={`flex items-center p-4 gap-4 relative cursor-pointer hover:bg-[#E5F0FF] ${
+                        activeContact === person.id ? "bg-[#E5F0FF]" : ""
+                      }`}
+                    >
+                      <div>
+                        <Image
+                          src={person.image}
+                          alt={person.name}
+                          width={48}
+                          height={48}
+                        />
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium ">{person.name}</h3>
+                        <p className="text-sm text-[#A1A1A1] truncate">
+                          {person.message}
+                        </p>
+                      </div>
+                      {person.hasNotification && (
+                        <div className="absolute right-5 top-2 h-2 w-2 rounded-full bg-red-500" />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-8">
-                {contacts.map((person) => (
-                  <div
-                    key={person.id}
-                    onClick={() => setActiveContact(person.id)}
-                    className={`flex items-center gap-4 relative cursor-pointer ${
-                      activeContact === person.id ? "bg-[#E5F0FF]" : ""
-                    }`}
-                  >
-                    <div>
-                      <Image
-                        src={person.image}
-                        alt={person.name}
-                        width={48}
-                        height={48}
-                      />
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium ">{person.name}</h3>
-                      <p className="text-sm text-[#A1A1A1] truncate">
-                        {person.message}
-                      </p>
-                    </div>
-                    {person.hasNotification && (
-                      <div className="absolute right-0 top-0 h-2 w-2 rounded-full bg-red-500" />
-                    )}
-                  </div>
-                ))}
+              <div>
+                <button
+                  className="absolute bottom-10 right-6 h-12 w-12 rounded-full bg-mainBlue hover:bg-blue-700 flex items-center justify-center shadow-lg transition-colors"
+                  aria-label="Open chat"
+                >
+                  <MessageSquare className="h-5 w-5 text-white" />
+                </button>
               </div>
             </div>
+          </Card>
+        </div>
 
-            <div>
-              <button
-                className="absolute bottom-10 right-6 h-12 w-12 rounded-full bg-mainBlue hover:bg-blue-700 flex items-center justify-center shadow-lg transition-colors"
-                aria-label="Open chat"
-              >
-                <MessageSquare className="h-5 w-5 text-white" />
-              </button>
-            </div>
-          </div>
-        </Card>
+        <div className="w-[40%]">{activeContact && <ChatInterface />}</div>
       </div>
-
-      <div className="w-[40%]">{activeContact && <ChatInterface />}</div>
     </div>
   );
 };
