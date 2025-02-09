@@ -1,3 +1,4 @@
+import Image from "next/image"
 import type React from "react"
 
 interface BadgeProps {
@@ -8,14 +9,15 @@ interface BadgeProps {
 
 export function Badge({ variant = "new", children, className = "" }: BadgeProps) {
   const variants = {
-    new: "bg-red-50 text-red-600 border-red-100",
-    subscription: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    new: " text-[#F53636] ",
+    subscription: "bg-[#E9F8F4] text-[#22B892] ",
   }
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full border ${variants[variant]} ${className}`}
+      className={`inline-flex  gap-1 items-center px-2 py-1 text-xs font-medium rounded-[4px]  ${variants[variant]} ${className}`}
     >
+      {variant==="subscription" &&<Image src={'/cup.svg'} alt="cup" width={11} height={11}/>}
       {children}
     </span>
   )

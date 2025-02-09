@@ -1,8 +1,11 @@
-'use client'
-import {  ToggleRadio } from "../buttons/RadioButton"; // Import your RadioButton component
+"use client"
+import { ToggleRadio } from "../buttons/RadioButton"; // Import your RadioButton component
 
 interface TemplateProps {
   title: string;
+  // New optional props for controlled selection:
+  selected?: boolean;
+  onToggle?: (checked: boolean) => void;
 }
 
 const bodyData = [
@@ -12,14 +15,12 @@ const bodyData = [
 
 const headerData = ["세트", "횟수", "중량", "RPE", "휴식"];
 
-const Template: React.FC<TemplateProps> = ({ title }) => {
-
-
+const Template: React.FC<TemplateProps> = ({ title, selected, onToggle }) => {
   return (
     <div className="flex w-full flex-col gap-[14px] p-[14px] rounded-[10px] bg-white">
       <div className="flex gap-[14px]">
-        
-        <ToggleRadio label={title}/>
+        {/* Pass the controlled props to ToggleRadio */}
+        <ToggleRadio label={title} checked={selected} onChange={onToggle} />
       </div>
       <section>
         <table className="w-full">

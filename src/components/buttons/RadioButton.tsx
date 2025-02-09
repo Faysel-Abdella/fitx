@@ -1,27 +1,29 @@
 "use client"
-
 import { useState } from "react"
 
 interface ToggleRadioProps {
-
   label?: string
-  checked?: boolean
+  // If 'checked' is provided, the component acts as a controlled component.
+  checked?: boolean 
   onChange?: (checked: boolean) => void
   className?: string
 }
 
 export function ToggleRadio({
-
   label,
-  checked: defaultChecked = false,
+  checked,
   onChange,
   className = "",
 }: ToggleRadioProps) {
-  const [isChecked, setIsChecked] = useState(defaultChecked)
+  // Use internal state only when 'checked' prop is undefined (uncontrolled mode)
+  const [internalChecked, setInternalChecked] = useState(false)
+  const isChecked = checked !== undefined ? checked : internalChecked
 
   const handleClick = () => {
     const newValue = !isChecked
-    setIsChecked(newValue)
+    if (checked === undefined) {
+      setInternalChecked(newValue)
+    }
     onChange?.(newValue)
   }
 
@@ -37,8 +39,7 @@ export function ToggleRadio({
           )}
         </div>
       </div>
-      {label && <span className="text-sm text-gray-700">{label}</span>}
+      {label && <span className="text-sm text-[#4d4d4d] font-semibold">{label}</span>}
     </label>
   )
 }
-

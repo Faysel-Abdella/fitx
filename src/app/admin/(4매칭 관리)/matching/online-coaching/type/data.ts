@@ -1,109 +1,21 @@
-import { UserData, TableColumn } from "./type"
+import { UserData, TableColumn } from "./type";
 
+export const sampleData: UserData[] = Array.from({ length: 100 }, (_, index) => {
+  const id = index + 1;
+  // For example, every 3rd entry is "confirmed" with an approval date; others are pending.
+  const isConfirmed = id % 3 === 0;
+  return {
+    id,
+    name: "홍길동",
+    phone: "01011111111",
+    userId: "ghdrlfehdwjs",
+    requestDate: "2025-11-18 16:12:40",
+    approvalDate: isConfirmed ? "2025-11-18 16:12:40" : "-",
+    status: isConfirmed ? "confirmed" : "pending",
+  };
+});
 
-export const sampleData: UserData[] = [
-  {
-    id: 10,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-      approvalDate: "-",
-    status: "pending",
-  },
-  {
-    id: 9,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "2025-11-18 16:12:40",
-    status: "confirmed",
-  },
-  {
-    id: 8,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "pending",
-  },
-  {
-    id: 7,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "pending",
-  },
-  {
-    id: 6,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "2025-11-18 16:12:40",
-    status: "rejected",
-  },
-  {
-    id: 5,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "pending",
-  },
-  {
-    id: 4,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "pending",
-  },
-  {
-    id: 3,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "2025-11-18 16:12:40",
-    status: "Ends",
-  },
-  {
-    id: 2,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "",
-  },
-  {
-    id: 1,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "",
-  },
-  {
-    id: 11,
-    name: "홍길동",
-    phone: "01011111111",
-    userId: "ghdrlfehdwjs",
-    requestDate: "2025-11-18 16:12:40",
-    approvalDate: "-",
-    status: "",
-  },
-]
-
-export const  columns: TableColumn<UserData>[] = [
+export const columns: TableColumn<UserData>[] = [
   { key: "id", header: "번호", width: "80px" },
   { key: "name", header: "이름" },
   { key: "phone", header: "휴대전화번호" },
@@ -111,6 +23,4 @@ export const  columns: TableColumn<UserData>[] = [
   { key: "requestDate", header: "신청 일시" },
   { key: "approvalDate", header: "승인 일시" },
   { key: "status", header: "상태" },
- 
-]
-
+];

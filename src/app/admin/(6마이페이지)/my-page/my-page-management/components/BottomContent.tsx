@@ -1,5 +1,6 @@
 "use client";
 import TextInput from "@/components/inputs/Input";
+import { Tooltip } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
 
@@ -31,6 +32,7 @@ const BottomContent = () => {
                 placeholder="300,000"
                 type="text"
                 inputWrapper="bg-white border border-[#DCDCDC]"
+                placeholderPosition="end"
               />
               <p className="text-[#4D4D4D] font-bold">원</p>
             </div>
@@ -39,7 +41,9 @@ const BottomContent = () => {
                 예상 정산 금액{" "}
                 <span className="text-[#006BFF] text-sm">234,567원</span>
               </p>
-              <Image src={"/error.svg"} alt="error" width={17} height={17} />
+              <Tooltip content="수수료 4%" placement="bottom-end">
+                <Image src={"/error.svg"} alt="error" width={17} height={17} />
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -48,7 +52,12 @@ const BottomContent = () => {
         <div className="flex flex-col md:flex-row items-start gap-6">
           {/* Icon Box */}
           <div className="flex flex-col gap-2 justify-center items-center bg-[#9D9D9D] py-2 px-6 rounded-[15px]">
-            <Image src={"/smileface.svg"} alt="smileface" width={52} height={35} />
+            <Image
+              src={"/smileface.svg"}
+              alt="smileface"
+              width={52}
+              height={35}
+            />
             <p className="text-lg text-white font-bold">온라인</p>
           </div>
           {/* Multiple Fee Options */}
@@ -61,6 +70,7 @@ const BottomContent = () => {
                   placeholder="120,000"
                   type="text"
                   inputWrapper="bg-white border border-[#DCDCDC]"
+                  placeholderPosition="end"
                 />
                 <p className="text-[#4D4D4D] font-bold">원</p>
               </div>
@@ -69,7 +79,14 @@ const BottomContent = () => {
                   예상 정산 금액{" "}
                   <span className="text-[#006BFF] text-sm">114,567원</span>
                 </p>
-                <Image src={"/error.svg"} alt="error" width={17} height={17} />
+                <Tooltip content="수수료 4%" placement="bottom-end">
+                  <Image
+                    src={"/error.svg"}
+                    alt="error"
+                    width={17}
+                    height={17}
+                  />
+                </Tooltip>
               </div>
             </div>
             {/* Option: 3회권 */}
@@ -80,6 +97,7 @@ const BottomContent = () => {
                   placeholder="350,000"
                   type="text"
                   inputWrapper="bg-white border border-[#DCDCDC]"
+                  placeholderPosition="end"
                 />
                 <p className="text-[#4D4D4D] font-bold">원</p>
               </div>
@@ -88,7 +106,14 @@ const BottomContent = () => {
                   예상 정산 금액{" "}
                   <span className="text-[#006BFF] text-sm">314,567원</span>
                 </p>
-                <Image src={"/error.svg"} alt="error" width={17} height={17} />
+                <Tooltip content="수수료 4%" placement="bottom-end">
+                  <Image
+                    src={"/error.svg"}
+                    alt="error"
+                    width={17}
+                    height={17}
+                  />
+                </Tooltip>
               </div>
             </div>
             {/* Option: 4회권 */}
@@ -99,6 +124,7 @@ const BottomContent = () => {
                   placeholder="450,000"
                   type="text"
                   inputWrapper="bg-white border border-[#DCDCDC]"
+                  placeholderPosition="end"
                 />
                 <p className="text-[#4D4D4D] font-bold">원</p>
               </div>
@@ -107,7 +133,14 @@ const BottomContent = () => {
                   예상 정산 금액{" "}
                   <span className="text-[#006BFF] text-sm">414,567원</span>
                 </p>
-                <Image src={"/error.svg"} alt="error" width={17} height={17} />
+                <Tooltip content="수수료 4%" placement="bottom-end">
+                  <Image
+                    src={"/error.svg"}
+                    alt="error"
+                    width={17}
+                    height={17}
+                  />
+                </Tooltip>
               </div>
             </div>
             {/* Option: 5회권 */}
@@ -118,6 +151,7 @@ const BottomContent = () => {
                   placeholder="550,000"
                   type="text"
                   inputWrapper="bg-white border border-[#DCDCDC]"
+                  placeholderPosition="end"
                 />
                 <p className="text-[#4D4D4D] font-bold">원</p>
               </div>
@@ -126,7 +160,14 @@ const BottomContent = () => {
                   예상 정산 금액{" "}
                   <span className="text-[#006BFF] text-sm">514,567원</span>
                 </p>
-                <Image src={"/error.svg"} alt="error" width={17} height={17} />
+                <Tooltip content="수수료 4%" placement="bottom-end">
+                  <Image
+                    src={"/error.svg"}
+                    alt="error"
+                    width={17}
+                    height={17}
+                  />
+                </Tooltip>
               </div>
             </div>
           </div>

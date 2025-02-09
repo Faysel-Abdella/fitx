@@ -1,4 +1,4 @@
-import {Input} from "@heroui/input";
+import { Input } from "@heroui/input";
 import React from "react";
 import { IInput } from "./type";
 
@@ -11,24 +11,26 @@ const TextInput = ({
   placeholder,
   height = "",
   inputWrapper,
+  // New prop: "placeholderPosition" to control text alignment
+  placeholderPosition = "start",
   ...rest
 }: IInput) => {
   return (
-    <div
-      className={`flex  w-full justify-center items-center ${containerStyle}`}
-    >
+    <div className={`flex w-full justify-center items-center ${containerStyle}`}>
       {label && (
         <label className={`${labelColor} text-[14px] font-[400] ${labelWidth}`}>
           {label}
         </label>
       )}
       <Input
+        // Inline style added for text alignment
+        style={{ textAlign: placeholderPosition === "end" ? "right" : "left" }}
         classNames={{
-          mainWrapper: ` "w-full ${height}"`,
+          mainWrapper: `w-full ${height}`,
           input:
             "placeholder:text-[#A3A6AB] placeholder:text-[13px] px-[0px] py-[12px]",
           label: "text-gray-500",
-          inputWrapper: `${inputWrapper}`,
+          inputWrapper: inputWrapper || "",
         }}
         placeholder={placeholder}
         type={type}

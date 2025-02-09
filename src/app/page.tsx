@@ -45,12 +45,15 @@ const LoginPage = () => {
             <label className="block text-sm font-normal text-[#333333] mb-3">
               아이디<span className="text-[#FF0000]">*</span>
             </label>
-            <TextInput
-              type="text"
-              containerStyle=" border border-[#D9D9D9] rounded-[10px]"
-              placeholder="아이디를 입력해주세요."
-              inputWrapper="bg-white"
-            />
+            <div className="">
+              {" "}
+              <TextInput
+                type="text"
+                containerStyle=" flex-1 bg-white hover:!bg-white focus:!bg-white border border-[#D9D9D9] rounded-[10px]"
+                placeholder="아이디를 입력해주세요."
+                inputWrapper="bg-white  hover:!bg-white focus:!bg-white   rounded-[8px] "
+              />
+            </div>
           </div>
 
           {/* Password Field */}
@@ -58,25 +61,27 @@ const LoginPage = () => {
             <label className="block text-sm font-normal text-[#333333] mb-3">
               비밀번호<span className="text-[#FF0000]">*</span>
             </label>
-            <div className="flex items-center bg-white border border-[#D9D9D9] rounded-[10px] px-3">
-              <TextInput
-                type={showPassword ? "text" : "password"}
-                containerStyle="flex-1  border-none"
-                placeholder="비밀번호를 입력해주세요."
-                inputWrapper="bg-white"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="text-gray-500"
-              >
-                {showPassword ? (
-                  <EyeOffIcon size={20} />
-                ) : (
-                  <EyeIcon size={20} />
-                )}
-              </button>
-            </div>
+            <div className="flex items-center bg-white hover:!bg-white focus:!bg-white active:!bg-white border border-[#D9D9D9] rounded-[10px] px-3">
+  <TextInput
+    type={showPassword ? "text" : "password"}
+    containerStyle="flex-1 w-full bg-white hover:!bg-white focus:!bg-white active:!bg-white border-none"
+    placeholder="비밀번호를 입력해주세요."
+    inputWrapper="bg-white rounded-none hover:!bg-white focus:!bg-white active:!bg-white"
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="text-gray-500"
+  >
+    {showPassword ? (
+      <EyeOffIcon size={20} />
+    ) : (
+      <EyeIcon size={20} />
+    )}
+  </button>
+</div>
+
+
           </div>
 
           {/* Login Button */}

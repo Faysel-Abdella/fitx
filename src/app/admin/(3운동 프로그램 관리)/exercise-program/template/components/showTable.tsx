@@ -4,14 +4,20 @@ import { useState } from "react";
 import { DataTable } from "../components/data-table";
 import { Pagination } from "../components/pagination";
 import { Badge } from "./bagdge";
-import {
-  TableColumn,
-  User,
-} from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type";
-import { users } from "../types/data";
+import { TableColumn, User } from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type";
 import Link from "next/link";
 import Image from "next/image";
 
+// Dummy data for testing (100 users)
+const users: User[] = Array.from({ length: 100 }, (_, index) => ({
+  id: index + 1,
+  name: `User ${index + 1}`,
+  country: index % 2 === 0 ? "US" : "kr", // Using "US" and "kr" as country codes
+  plan: index % 2 === 0 ? "PRO PLAN" : "ULTIMATE PLAN",
+  hasSubscription: index % 3 === 0,
+  action: "자세히보기",
+  isNew: index % 5 === 0,
+}));
 
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,9 +70,12 @@ export default function Page() {
       header: "구성하기",
       key: "action",
       render: (value) => (
-        <button className="text-[#006BFF] underline underline-offset-1 hover:text-[#006BFF]">
-            <Link href={'/admin/exercise-program/template/playerdetails'}> {value as string}</Link>
-         
+        <button
+          className="text-[#006BFF] underline underline-offset-1 hover:text-[#006BFF]"
+        >
+          <Link href={"/admin/exercise-program/template/playerdetails"}>
+            {value as string}
+          </Link>
         </button>
       ),
     },
@@ -90,7 +99,7 @@ export default function Page() {
       <div className="mb-4 flex justify-between items-center">
         <h2 className="text-lg font-medium">총 {users.length}명</h2>
         <select
-          className="p-2 border-1 border-[#DCDCDC] bg-white  rounded-lg"
+          className="p-2 border border-[#DCDCDC] bg-white rounded-lg"
           value={rowsPerPage}
           onChange={handleRowsPerPageChange}
         >
@@ -108,7 +117,7 @@ export default function Page() {
         onPageChange={setCurrentPage}
       />
       <div className="flex justify-center mt-4">
-        <button className=" min-w-[270px]   py-3  px-4 bg-[#006BFF] text-white font-medium rounded-[100px] hover:bg-[#006BFF] transition-colors">
+        <button className="min-w-[270px] py-3 px-4 bg-[#006BFF] text-white font-medium rounded-[100px] hover:bg-[#006BFF] transition-colors">
           추가
         </button>
       </div>

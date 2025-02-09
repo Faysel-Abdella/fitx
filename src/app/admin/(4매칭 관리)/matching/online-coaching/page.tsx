@@ -5,11 +5,10 @@ import ShowTable from "./components/showTable";
 const OfflineCoaching = () => {
   return (
     <>
-      <div className="mb-5">
+      <div className="mb-5 mx-auto w-[98%]">
         <TopContent />
       </div>
-      <div> <ShowTable/></div>
-     
+      <ShowTable/>
     </>
   );
 };

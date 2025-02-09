@@ -1,13 +1,14 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+
+import Image from "next/image";
 import React from "react";
 
 const Calendar = () => {
   return (
     <div className="flex flex-col gap-[30px] border-1 border-[#DCDCDC] bg-white rounded-[10px] px-[18px] pt-[18px] pb-[43px]">
-      <div className="flex items-center">
-        <ChevronLeftIcon className="w-4 h-4" />
-        <p className="font-bold text-[#000000] text-lg">1월</p>
-        <ChevronRightIcon className="w-4 h-4" />
+      <div className="flex gap-1 items-center">
+        <Image src={'/chevroletleft.svg'} alt="left" width={20} height={12}/>
+        <p className="font-bold text-[#000000] text-[20px]">1월</p>
+         <Image src={'/chevroletright2.svg'} alt="left" width={20} height={12}/>
       </div>
       <div className="flex flex-col gap-[15px]">
         <div className="flex gap-[16px]">
