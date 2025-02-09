@@ -9,9 +9,12 @@ import FindIdModal from "@/components/modals/loginModals/FindIdModal";
 // import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
+import Link from "next/link";
 
 const LoginPage = () => {
-  const [modalType, setModalType] = useState<"findId" | "findPassword" | null>(null);
+  const [modalType, setModalType] = useState<"findId" | "findPassword" | null>(
+    null
+  );
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -67,23 +70,35 @@ const LoginPage = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 className="text-gray-500"
               >
-                {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+                {showPassword ? (
+                  <EyeOffIcon size={20} />
+                ) : (
+                  <EyeIcon size={20} />
+                )}
               </button>
             </div>
           </div>
 
           {/* Login Button */}
           <div className="flex justify-center mt-[41px]">
-            <button className="w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg">
-              로그인
-            </button>
+            <Link href="/admin/player-management">
+              <button className="w-[218px] px-2 py-3 bg-[#000000] text-white rounded-lg">
+                로그인
+              </button>
+            </Link>
           </div>
 
           {/* Links */}
           <div className="flex justify-center mt-4 space-x-4 text-[#006BFF] text-sm">
-          <button type="button" onClick={()=>{}}>회원가입</button>
-            <button type="button" onClick={() => openModal("findId")}>ID 찾기</button>
-            <button type="button" onClick={() => openModal("findPassword")}>비밀번호 찾기</button>
+            <button type="button" onClick={() => {}}>
+              회원가입
+            </button>
+            <button type="button" onClick={() => openModal("findId")}>
+              ID 찾기
+            </button>
+            <button type="button" onClick={() => openModal("findPassword")}>
+              비밀번호 찾기
+            </button>
           </div>
         </form>
       </div>
