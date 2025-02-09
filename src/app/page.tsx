@@ -52,6 +52,7 @@ const LoginPage = () => {
                 variant="bordered"
                 classNames={{
                   inputWrapper: "py-6",
+                  input: "text-base",
                 }}
               />
             </div>
@@ -70,6 +71,7 @@ const LoginPage = () => {
                 className="border-none"
                 classNames={{
                   inputWrapper: "py-6",
+                  input: "text-base",
                 }}
                 endContent={
                   <button
