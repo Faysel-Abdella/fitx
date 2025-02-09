@@ -7,5 +7,9 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <SideBar>{children}</SideBar>;
+  return (
+    <SideBar>
+      <div className="max-w-[1350px]">{children}</div>
+    </SideBar>
+  );
 }
