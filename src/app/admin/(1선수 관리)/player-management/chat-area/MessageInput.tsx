@@ -1,12 +1,14 @@
 "use client";
-import { useState, useRef } from "react";
+import image from "@/assets/icons/recordIcon.svg";
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/dropdown";
-import { ImageIcon, Video, Monitor, Send } from "lucide-react"; // Using Lucide icons
+import { ImageIcon, Images, Send } from "lucide-react"; // Using Lucide icons
+import Image from "next/image";
+import { useRef, useState } from "react";
 
 const MessageInput = () => {
   const [recording, setRecording] = useState<boolean>(false);
@@ -81,7 +83,7 @@ const MessageInput = () => {
           className="flex-1 bg-[#F5F5F5] py-3 px-6 rounded-l-2xl text-base focus:outline-none placeholder-[#A1A1A1]"
         />
         {/* Media options dropdown */}
-        <Dropdown>
+        <Dropdown className="p-0">
           <DropdownTrigger>
             <div className="flex items-center gap-2 cursor-pointer bg-[#F5F5F5] py-3 ">
               <ImageIcon className="w-6 h-6 opacity-60" />
@@ -89,18 +91,31 @@ const MessageInput = () => {
           </DropdownTrigger>
           <DropdownMenu
             aria-label="Media options"
-            className="bg-white shadow-md rounded-md w-48"
+            className="bg-[#5B5B5B] shadow-md p-2 rounded-md "
           >
-            <DropdownItem key="media-record-2" onClick={handleFileSelection}>
-              <div className="flex items-center gap-2 px-4 py-2 ">
-                <Video className="w-4 h-4 mr-2" />
-                <p className="text-sm">Select Media</p>
+            <DropdownItem
+              key="media-record-2"
+              onClick={handleFileSelection}
+              // className="hover:border-[#FF0000] border-none hover:bg-inherit"
+              classNames={{
+                base: "hover:border-[#FF0000] border-none hover:bg-inherit",
+                // list: "p-24",
+                description: "p-24",
+              }}
+            >
+              <div className="flex  gap-12 items-center text-white hover:border-[#FF0000] font-semibold  ">
+                <p className="text-base mr-12 ">앨범</p>
+                <Images className="w-4 h-4 " />
               </div>
             </DropdownItem>
-            <DropdownItem key="screen-record" onClick={handleScreenRecord}>
-              <div className="flex items-center gap-2 px-4 py-2 ">
-                <Monitor className="w-4 h-4 mr-2" />
-                <p className="text-sm">Screen Record</p>
+            <DropdownItem
+              key="screen-record"
+              onClick={handleScreenRecord}
+              className="hover:border-[#FF0000]"
+            >
+              <div className="flex flex-1 items-center text-white font-semibold   ">
+                <p className="text-base mr-12">비디오 코칭</p>
+                <Image src={image} alt="Video coaching icon" />
               </div>
             </DropdownItem>
           </DropdownMenu>

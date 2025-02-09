@@ -186,14 +186,23 @@ export default function Scheduler() {
                   </span>
                   {/* Circular Date Container */}
                   <div
-                    className={`h-[30px] w-[30px] cursor-pointer hover:bg-[#F5F5F5]  flex items-center justify-center rounded-full mt-1 ${
-                      isActive
-                        ? "bg-mainBlue text-white border border-mainBlue"
-                        : "bg-white text-[#767676]"
-                    }`}
+                    className={`relative h-[30px] w-[30px] cursor-pointer hover:bg-[#F5F5F5] flex items-center justify-center rounded-full mt-1 
+    ${
+      isActive
+        ? "bg-mainBlue text-white border border-mainBlue"
+        : "bg-white text-[#767676]"
+    }`}
                     onClick={() => setActiveDate(new Date(day))}
                   >
                     <span className="text-xs font-medium">{day.getDate()}</span>
+
+                    {/* Dot inside the circle, appears only on every 3rd day */}
+                    {day.getDate() % 3 === 0 && (
+                      <div
+                        className={`absolute bottom-[2px] h-[5px] w-[5px] rounded-full transition-opacity 
+        ${isActive ? "bg-white" : "bg-mainBlue"}`}
+                      />
+                    )}
                   </div>
                 </div>
               );
