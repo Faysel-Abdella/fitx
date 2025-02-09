@@ -6,7 +6,6 @@ interface TemplateProps {
   // New optional props for controlled selection:
   selected?: boolean;
   onToggle?: (checked: boolean) => void;
-  selectAll?:boolean
 }
 
 const bodyData = [
@@ -16,7 +15,7 @@ const bodyData = [
 
 const headerData = ["세트", "횟수", "중량", "RPE", "휴식"];
 
-const Template: React.FC<TemplateProps> = ({ title, selected, selectAll, onToggle }) => {
+const Template: React.FC<TemplateProps> = ({ title, selected, onToggle }) => {
   return (
     <div className="flex w-full flex-col gap-[14px] p-[14px] rounded-[10px] bg-white">
       <div className="flex gap-[14px]">
