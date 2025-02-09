@@ -1,6 +1,7 @@
 "use client";
 import DropDown from "@/components/dropDown/DropDown";
 import Header from "@/components/Header";
+import {  Tooltip } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
 const Options1 = [
@@ -56,7 +57,17 @@ const TopContent = () => {
                 <p className="text-[24px] text-[#2B2B2B] font-bold">
                   2,750,000원
                 </p>
-                <Image src={"/error.svg"} alt="error" width={14} height={14} />
+              <Tooltip content="정산 금액은 세전 기준이며, 세금은 직접 납부하셔야 합니다." placement="top-end">
+  
+    <Image
+      src="/error.svg"
+      alt="error"
+      width={14}
+      height={14}
+    />
+  
+</Tooltip>
+
               </div>
             </div>
             <div className="flex gap-10">

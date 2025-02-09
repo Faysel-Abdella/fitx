@@ -99,7 +99,7 @@ const PlayerDetail = () => {
                       {row.map((cell) => (
                         <td
                           key={cell.key}
-                          className="px-3 py-2 text-sm text-[#A1A1A1] text-center"
+                          className="px-3 font-semibold py-2 text-sm text-[#A1A1A1] text-center"
                         >
                           {cell.label}
                         </td>
@@ -135,7 +135,7 @@ const PlayerDetail = () => {
                       {row.map((cell) => (
                         <td
                           key={cell.key}
-                          className="px-3 py-2 text-sm text-[#A1A1A1] text-center"
+                          className="px-3 py-2 font-semibold  text-sm text-[#4D4D4D] text-center"
                         >
                           {cell.label}
                         </td>
@@ -158,7 +158,7 @@ const PlayerDetail = () => {
                     {headerData.map((data) => (
                       <th
                         key={data.key}
-                        className="text-[#D1D1D1] text-xs px-3 py-2"
+                        className="text-[#D1D1D1] font-semibold text-xs px-3 py-2"
                       >
                         {data.label}
                       </th>
@@ -171,7 +171,7 @@ const PlayerDetail = () => {
                       {row.map((cell) => (
                         <td
                           key={cell.key}
-                          className="px-3 py-2 text-sm text-[#A1A1A1] text-center"
+                          className="px-3 py-2 font-semibold text-sm text-[#4D4D4D] text-center"
                         >
                           {cell.label}
                         </td>

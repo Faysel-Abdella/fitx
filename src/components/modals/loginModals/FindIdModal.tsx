@@ -29,7 +29,7 @@ const FindIdModal = () => {
         </div>
       </div>
       <div className="mt-10">
-        <button className="w-[400px] py-4 rounded-[10px] bg-[#000000] text-white">
+        <button className="w-[400px] py-5 rounded-[10px] bg-[#000000] text-white">
           확인
         </button>
       </div>
@@ -37,7 +37,7 @@ const FindIdModal = () => {
         <p className="text-sm text-center text-[#FF0000]">
           이름, 이메일주소와 일치하는 아이디를 메일로 전달드렸습니다.
         </p>
-        <button className="w-[400px] py-4 rounded-[10px] bg-[#D1D1D1] text-[#333333]">
+        <button className="w-[400px] py-3 rounded-[10px] bg-[#D1D1D1] text-[#333333]">
           EMAIL : abcd123@abc.com
         </button>
       </div>

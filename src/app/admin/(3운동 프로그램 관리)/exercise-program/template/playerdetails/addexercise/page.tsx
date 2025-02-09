@@ -14,6 +14,7 @@ import { Textarea, useDisclosure } from "@heroui/react";
 import TextInput from "@/components/inputs/Input";
 import Modal from "@/components/modals/Modal";
 import AddExerciseModal from "./components/AddExerciseModal";
+import Image from "next/image";
 
 const ADDExercise = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -164,7 +165,11 @@ const ADDExercise = () => {
                 onClick={addSet}
                 className="text-[#006BFF] text-center hover:text-blue-600 text-sm font-medium"
               >
-                + 세트 추가
+              <div className="flex gap-1">
+                <Image src={'/plus.svg'} alt="plus" width={11} height={11} />
+                <p className="">세트 추가</p>
+              </div>
+                
               </button>
             </div>
           </div>
@@ -180,7 +185,7 @@ const ADDExercise = () => {
             <p className="text-[#A1A1A1] text-xs text-end">0 / 50</p>
           </div>
           <div className="flex flex-col gap-2 mt-5">
-            <p className="font-bold text-[#4D4D4D] text-xs">코멘트 (선택)</p>
+            <p className="font-bold text-[#4D4D4D] text-xs">링크 (선택)</p>
             <TextInput
               placeholder="링크 입력"
               type="text"

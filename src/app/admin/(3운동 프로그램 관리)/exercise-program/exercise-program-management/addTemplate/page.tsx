@@ -10,6 +10,7 @@ import Modal from "@/components/modals/Modal";
 import AddTemplateModal from "./components/AddTemplateModal";
 import { useDisclosure } from "@heroui/react";
 import Header from "@/components/Header";
+import Image from "next/image";
 export default function ExerciseForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [exercise, setExercise] = useState<Exercise>({
@@ -54,22 +55,21 @@ export default function ExerciseForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Exercise Selection Input */}
           <div className="relative">
-            <div className="flex items-center w-full cursor-pointer">
+            <div
+              onClick={onOpen}
+              className="flex items-center w-full cursor-pointer"
+            >
               <input
                 type="text"
-                value={exercise.name}
                 placeholder="운동 선택"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 cursor-pointer"
                 readOnly
               />
-              <ChevronRightIcon
-                className="w-5 h-5 text-gray-400 absolute right-3"
-                onClick={onOpen}
-              />
-              <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                <AddTemplateModal />
-              </Modal>
+              <ChevronRightIcon className="w-5 h-5 text-gray-400 absolute right-3" />
             </div>
+            <Modal radius="rounded-[5px]" isOpen={isOpen} onOpenChange={onOpenChange}>
+              <AddTemplateModal />
+            </Modal>
           </div>
 
           {/* Sets Table */}
@@ -151,7 +151,11 @@ export default function ExerciseForm() {
                 onClick={addSet}
                 className="text-[#006BFF] text-center hover:text-blue-600 text-sm font-medium"
               >
-                + 세트 추가
+                <div className="flex items-center gap-1">
+                  <Image src={"/plus.svg"} alt="plus" width={10} height={10} />
+                   <p className="text-[#006BFF] text-sm">세트 추가</p>
+                </div>{" "}
+               
               </button>
             </div>
           </div>
@@ -159,7 +163,7 @@ export default function ExerciseForm() {
             {" "}
             <button
               type="submit"
-              className=" py-4 w-[270px] bg-[#006BFF] text-white font-medium rounded-[100px] hover:bg-blue-600 transition-colors"
+              className=" py-[13px] w-[280px] bg-[#006BFF] text-white font-medium rounded-[100px] hover:bg-blue-600 transition-colors"
             >
               추가
             </button>

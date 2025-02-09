@@ -8,5 +8,6 @@ export interface IInput  {
     placeholder: string;
     containerStyle?: string;
     height?: string;
+    placeholderPosition?:string
   }
   
