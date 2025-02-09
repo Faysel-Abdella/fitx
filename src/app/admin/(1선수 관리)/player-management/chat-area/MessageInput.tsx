@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-
+import { useState, useRef } from "react";
 import {
   Dropdown,
   DropdownItem,
@@ -14,10 +13,22 @@ const MessageInput = () => {
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
-  // Handle file selection (placeholder for now)
+  // Ref for the hidden file input
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Handle file selection
   const handleFileSelection = () => {
     console.log("File selection triggered");
-    // You can open a file picker here using <input type="file" />
+    fileInputRef.current?.click(); // Trigger the hidden file input
+  };
+
+  // Handle file change event
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length) {
+      console.log("Selected file:", files[0]);
+      // Process the file as needed (e.g., upload, preview, etc.)
+    }
   };
 
   // Handle screen recording
@@ -37,13 +48,11 @@ const MessageInput = () => {
   // Start recording logic
   const startRecording = (stream: MediaStream) => {
     const recorder = new MediaRecorder(stream);
-
     recorder.ondataavailable = (event: BlobEvent) => {
       if (event.data.size > 0) {
         setRecordedChunks((prevChunks) => [...prevChunks, event.data]);
       }
     };
-
     recorder.onstop = () => {
       setRecording(false);
       const blob = new Blob(recordedChunks, { type: "video/webm" });
@@ -51,7 +60,6 @@ const MessageInput = () => {
       console.log("Recording stopped. Video URL:", url);
       // Optionally, you can display or download the video here
     };
-
     recorder.start();
     setRecording(true);
 
@@ -72,7 +80,6 @@ const MessageInput = () => {
           placeholder="메시지 입력"
           className="flex-1 bg-[#F5F5F5] py-3 px-6 rounded-l-2xl text-base focus:outline-none placeholder-[#A1A1A1]"
         />
-
         {/* Media options dropdown */}
         <Dropdown>
           <DropdownTrigger>
@@ -98,17 +105,23 @@ const MessageInput = () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-
         {/* Send button */}
-        <div className=" cursor-pointer bg-[#F5F5F5] py-3 pl-3 pr-5 rounded-r-2xl">
+        <div className="cursor-pointer bg-[#F5F5F5] py-3 pl-3 pr-5 rounded-r-2xl">
           <Send className="w-6 h-6 bg-[#F5F5F5]  opacity-60 cursor-pointer ml-2" />
         </div>
       </div>
-
       {/* Recording status message */}
       {recording && (
         <p className="text-green-500 mt-2 text-sm">Recording in progress...</p>
       )}
+
+      {/* Hidden file input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+      />
     </div>
   );
 };

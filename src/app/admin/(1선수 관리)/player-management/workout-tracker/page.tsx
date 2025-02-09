@@ -8,10 +8,10 @@ const ChatArea = () => {
     <div>
       <Header title="피드백" />{" "}
       <div className="flex gap-6 mt-8 items-stretch">
-        <div className="w-[40%%]  ">
+        <div className="w-[33%%]  ">
           <Scheduler />
         </div>
-        <div className="w-[35%]">
+        <div className="w-[45%]">
           <WorkoutCard />
         </div>
       </div>

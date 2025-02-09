@@ -70,11 +70,11 @@ export default function WeeklyPlan() {
               <div
                 key={day}
                 className={`
-              border rounded-lg p-4 flex flex-col justify-between 
-              ${day === selectedDay ? "border-blue-500" : "border-gray-200"}
+              border rounded-lg p-4 flex flex-col justify-between cursor-pointer
+              ${day === selectedDay ? "border-mainBlue" : "border-[#E9E9E9]"}
               ${
                 day === selectedDay
-                  ? "bg-white text-[#006BFF]"
+                  ? "bg-white text-[#006BFF] font-medium"
                   : "bg-white text-gray-900"
               }
               transition-all duration-280 ease-in-out
@@ -127,7 +127,7 @@ export default function WeeklyPlan() {
                   </Button>
                 </ModalHeader>
                 <ModalBody>
-                  <div className="flex justify-between mx-6 h-[40px] items-center">
+                  <div className="flex justify-between ml-6 mr-12 h-[40px] items-center">
                     <DropDownWithLabel
                       title="카테고리"
                       options={[
@@ -223,14 +223,14 @@ export default function WeeklyPlan() {
                 </ModalHeader>
                 <ModalBody>
                   {/* Body */}
-                  <div className="space-y-4">
+                  <div className="space-y-8">
                     <TableTwo title="스쿼트" color="#006BFF" />
                     <TableTwo title="벤치프레스" color="#A0A0A0" />
                   </div>
                 </ModalBody>
                 <ModalFooter className="flex justify-center items-center">
                   <Button
-                    className="bg-[#4D4D4D] text-white rounded-md"
+                    className="bg-[#4D4D4D] mb-6 mt-3 text-white rounded-md"
                     onPress={onClose2}
                   >
                     저장

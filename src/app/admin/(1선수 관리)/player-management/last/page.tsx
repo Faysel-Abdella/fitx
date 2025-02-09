@@ -8,7 +8,7 @@ export default function Page() {
     <div>
       <Header title="상세보기" />
       <div className="flex  gap-5 mt-8 mx-0  ">
-        <div className=" flex-1">
+        <div className="">
           <ColumnOne />
         </div>
         <div className=" flex-1">

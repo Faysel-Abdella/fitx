@@ -2,7 +2,7 @@ import React from "react";
 interface headerProps {
   title: string;
 }
-const Header = ({title}:headerProps) => {
+const Header = ({ title }: headerProps) => {
   return (
     <div className="flex flex-col gap-[40px]">
       <div className="flex justify-end gap-[24px]">
@@ -12,7 +12,7 @@ const Header = ({title}:headerProps) => {
         <p className="text-[#A0A0A0]">로그아웃</p>
       </div>
       <div>
-        <h1 className="font-bold text-[30px] text-[#4D4D4D]">{title}</h1>
+        <h1 className="font-bold text-[30px] my-4 text-[#4D4D4D]">{title}</h1>
       </div>
     </div>
   );

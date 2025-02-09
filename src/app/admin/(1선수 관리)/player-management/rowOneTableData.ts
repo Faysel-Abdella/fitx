@@ -52,7 +52,7 @@ const demo = [
   },
 ];
 
-const rowOneTableData = Array.from({ length: 30 }, (_, rowIndex) => ({
+const rowOneTableData = Array.from({ length: 70 }, (_, rowIndex) => ({
   ...demo[0],
   id: rowIndex + 1,
   number: rowIndex + 1,

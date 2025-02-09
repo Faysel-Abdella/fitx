@@ -8,8 +8,8 @@ export default function WorkoutCard() {
   // Using a reliable sample video from Cloudinary
 
   return (
-    <div>
-      <Card className="w-[320px]">
+    <div className="w-[340px]">
+      <Card>
         <CardBody className="p-4">
           {/* Header */}
           <div className=" font-normal text-[#4D4D4D] mt-2 mb-4">
@@ -54,7 +54,7 @@ export default function WorkoutCard() {
           </div>
         </CardBody>
       </Card>
-      <Card className="w-[320px] my-5">
+      <Card className=" my-5">
         <CardBody className="p-4">
           <CircleAlert className="text-[#A1A1A1] w-5 h-5" />
           <p className="text-[#A1A1A1] text-sm pt-2">
