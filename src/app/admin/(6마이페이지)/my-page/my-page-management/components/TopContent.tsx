@@ -17,7 +17,7 @@ const TopContent = () => {
     <div>
       <Header title="내 정보 관리" />
       {/* Responsive container */}
-      <div className="  mx-auto px-4">
+      <div className="  mx-auto ">
         <div className="flex mt-10 flex-col space-y-5 p-5 rounded-[20px] bg-white">
           <p className="text-[#4D4D4D] font-bold text-lg">내 정보 수정</p>
 
@@ -66,7 +66,7 @@ const TopContent = () => {
                   <DropDown
                     options={Options2}
                     defaultSelectedKeys={Options2[0].key}
-                      selectContainerStyles="w-full"
+                    selectContainerStyles="w-full"
                   />
                 </div>
               </div>
@@ -109,7 +109,6 @@ const TopContent = () => {
                   <DropDown
                     options={Options2}
                     defaultSelectedKeys={Options2[0].key}
-                  
                     selectContainerStyles="w-full "
                   />
                 </div>
@@ -134,7 +133,9 @@ const TopContent = () => {
           <div className="flex flex-col md:flex-row justify-center items-center pt-5 gap-12">
             <div className="flex items-center gap-5">
               <Image src={"/lock.svg"} alt="lock" width={17} height={17} />
-              <p className="text-sm text-[#4D4D4D] font-semibold">비밀번호변경</p>
+              <p className="text-sm text-[#4D4D4D] font-semibold">
+                비밀번호변경
+              </p>
               <Image
                 src={"/chevroletright.svg"}
                 alt="chevroletright"
@@ -143,8 +144,15 @@ const TopContent = () => {
               />
             </div>
             <div className="flex items-center gap-5">
-              <Image src={"/document.svg"} alt="document" width={17} height={17} />
-              <p className="text-sm text-[#4D4D4D] font-semibold">코치 소개글</p>
+              <Image
+                src={"/document.svg"}
+                alt="document"
+                width={17}
+                height={17}
+              />
+              <p className="text-sm text-[#4D4D4D] font-semibold">
+                코치 소개글
+              </p>
               <Image
                 src={"/chevroletright.svg"}
                 alt="chevroletright"
@@ -174,8 +182,7 @@ const TopContent = () => {
             </div>
           </div>
         </div>
-      
-    </div>
+      </div>
     </div>
   );
 };
