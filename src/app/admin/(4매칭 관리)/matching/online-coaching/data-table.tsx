@@ -3,10 +3,8 @@
 import DropDown from "@/components/dropDown/DropDown";
 import TextInput from "@/components/inputs/Input";
 import Modal from "@/components/modals/Modal";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useDisclosure } from "@heroui/react";
 import { useState } from "react";
-// import { TableColumn, UserData } from "./type/type";
 
 import {
   Table,
