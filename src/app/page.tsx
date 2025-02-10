@@ -6,7 +6,7 @@ import { Input } from "@heroui/react";
 import { useDisclosure } from "@heroui/react";
 import Modal from "@/components/modals/Modal";
 import FindIdModal from "@/components/modals/loginModals/FindIdModal";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { Eye, EyeIcon, EyeOff, EyeOffIcon } from "lucide-react";
 import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
 import Link from "next/link";
 
@@ -45,15 +45,20 @@ const LoginPage = () => {
               아이디<span className="text-[#FF0000]">*</span>
             </label>
             <div className="">
-              {" "}
+              {/* {" "}
               <Input
                 type="text"
-                placeholder="아이디를 입력해주세요."
+                placeholder=""
                 variant="bordered"
                 classNames={{
                   inputWrapper: "py-6",
                   input: "text-base",
                 }}
+              /> */}
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="아이디를 입력해주세요."
+                className="w-full rounded-2xl border hover:bg-[#F5F5F5] border-[#D9D9D9] bg-white px-4 py-3 text-base text-gray-900 outline-none placeholder:text-gray-400 transition-all"
               />
             </div>
           </div>
@@ -63,7 +68,29 @@ const LoginPage = () => {
             <label className="block text-sm font-normal text-[#333333] mb-3">
               비밀번호<span className="text-[#FF0000]">*</span>
             </label>
-            <div className="flex items-center rounded-xl">
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="비밀번호를 입력해주세요"
+                className="w-full rounded-2xl border hover:bg-[#F5F5F5] border-[#D9D9D9] bg-white px-4 py-3 text-base text-gray-900 outline-none placeholder:text-gray-400 transition-all"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showPassword ? (
+                  <Eye className="h-6 w-6" />
+                ) : (
+                  <EyeOff className="h-6 w-6" />
+                )}
+                <span className="sr-only">
+                  {showPassword ? "Hide password" : "Show password"}
+                </span>
+              </button>
+            </div>
+            {/* <div className="flex items-center rounded-xl">
               <Input
                 type={showPassword ? "text" : "password"}
                 variant="bordered"
@@ -87,7 +114,7 @@ const LoginPage = () => {
                   </button>
                 }
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Login Button */}
