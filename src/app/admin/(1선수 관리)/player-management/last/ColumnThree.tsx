@@ -11,13 +11,11 @@ export const ColumnThree = () => {
         <MenuItem
           icon={<Dumbbell className="w-5 h-5" />}
           text="대시보드"
-          href="/dashboard"
           className="flex-1"
         />
         <MenuItem
           icon={<Flag className="w-5 h-5" />}
           text="캘린더"
-          href="/calendar"
           className="flex-1"
         />
       </div>

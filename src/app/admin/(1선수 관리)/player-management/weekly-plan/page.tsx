@@ -17,6 +17,7 @@ import Image from "next/image";
 import Table from "./ModalTable";
 import DropDownWithLabel from "@/components/dropDown/DropDownwithlabel";
 import TableTwo from "./TableTwo";
+import image from "@/assets/icons/x.svg";
 
 export default function WeeklyPlan() {
   const days = Array.from({ length: 7 }, (_, i) => i + 1);
@@ -112,19 +113,27 @@ export default function WeeklyPlan() {
         </div>
 
         {/* Exercise Modal */}
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} hideCloseButton={true}>
           {/* Set max height to 95vh so content can expand up to 95% of the viewport height before scrolling */}
           <ModalContent className="max-w-4xl max-h-[95vh] overflow-y-auto">
             {(onClose) => (
               <>
-                <ModalHeader className="flex items-center mt-2 mr-4 justify-between gap-1">
+                <ModalHeader className="flex items-center mt-2 mr-12 justify-between gap-1">
                   <div>운동 추가하기</div>
-                  <Button
-                    className="bg-[#4D4D4D] text-white rounded-md"
-                    onPress={onOpen2}
+                  <div>
+                    <Button
+                      className="bg-[#4D4D4D] relative  text-white rounded-md w-full"
+                      onPress={onOpen2}
+                    >
+                      템플릿
+                    </Button>
+                  </div>
+                  <button
+                    className="absolute top-0 right-0 mt-2 mx-3"
+                    onClick={onClose}
                   >
-                    템플릿
-                  </Button>
+                    <Image src={image} alt="" />
+                  </button>
                 </ModalHeader>
                 <ModalBody>
                   <div className="flex justify-between ml-6 mr-12 h-[40px] items-center">
@@ -210,16 +219,15 @@ export default function WeeklyPlan() {
         </Modal>
 
         {/* Second (Template) Modal */}
-        <Modal
-          isOpen={isOpen2}
-          onClose={onClose2}
-          classNames={{ closeButton: "text-lg" }}
-        >
+        <Modal isOpen={isOpen2} onClose={onClose2} hideCloseButton={true}>
           <ModalContent className="max-w-lg">
             {(onClose2) => (
               <>
                 <ModalHeader className="flex items-center justify-between">
                   템플릿
+                  <button onClick={onClose2}>
+                    <Image src={image} alt="" />
+                  </button>
                 </ModalHeader>
                 <ModalBody>
                   {/* Body */}
@@ -228,9 +236,15 @@ export default function WeeklyPlan() {
                     <TableTwo title="벤치프레스" color="#A0A0A0" />
                   </div>
                 </ModalBody>
-                <ModalFooter className="flex justify-center items-center">
+                <ModalFooter className="flex justify-center items-center gap-3">
                   <Button
-                    className="bg-[#4D4D4D] mb-6 mt-3 text-white rounded-md"
+                    className="bg-gray-500 text-white rounded-md"
+                    onPress={onClose2}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    className="bg-[#4D4D4D] text-white rounded-md"
                     onPress={onClose2}
                   >
                     저장
