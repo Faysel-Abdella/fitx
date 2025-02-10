@@ -1,4 +1,3 @@
-
 import { Select, SelectItem } from "@heroui/react";
 
 const HeaderDropDown = ({
@@ -11,18 +10,20 @@ const HeaderDropDown = ({
 }: {
   options: { key: string; label: string }[];
   defaultSelectedKey: string;
-  value: string;
-  setNewValue: (value: string) => void;
+  value?: string;
+  setNewValue?: (value: string) => void;
   styles?: string;
   mainStyles?: string;
 }) => {
   return (
     <Select
-      selectedKeys={[value]}
+      selectedKeys={value ? [value] : undefined}
       disallowEmptySelection={true}
       onChange={(e) => {
-        setNewValue(e.target.value);
-        console.log(e.target.value);
+        if (setNewValue) {
+          setNewValue(e.target.value);
+          console.log(e.target.value);
+        }
       }}
       defaultSelectedKeys={[defaultSelectedKey]}
       classNames={{
