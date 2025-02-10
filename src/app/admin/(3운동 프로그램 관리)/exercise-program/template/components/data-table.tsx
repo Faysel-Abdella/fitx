@@ -80,37 +80,6 @@ export function DataTable() {
   };
 
   return (
-    // <div className={` w-full overflow-hidden rounded-b-lg ${className}`}>
-    //   <table className="w-full divide-y  divide-gray-200">
-    //     <thead className="bg-gray-50 ">
-    //       <tr>
-    //         {columns.map((column) => (
-    //           <th
-    //             key={column.key.toString()}
-    //             className="px-6 py-3 text-left text-sm font-medium text-gray-500"
-    //           >
-    //             {column.header}
-    //           </th>
-    //         ))}
-    //       </tr>
-    //     </thead>
-    //     <tbody className="bg-white divide-y px-12 divide-gray-200">
-    //       {data.map((row) => (
-    //         <tr key={row.id} className="hover:bg-gray-50">
-    //           {columns.map((column) => (
-    //             <td
-    //               key={`${row.id}-${column.key.toString()}`}
-    //               className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
-    //             >
-    //               {renderCellContent(column, row)}
-    //             </td>
-    //           ))}
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
-
     <section>
       <div className="bg-white p-10 rounded-[20px] mt-9">
         <header className="flex items-center justify-between">
