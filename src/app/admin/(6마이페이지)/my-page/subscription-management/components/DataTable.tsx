@@ -45,12 +45,15 @@ const DataTable = () => {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
   // Check if all rows on the page are selected
-  const allSelected = items.length > 0 && items.every((row) => selectedRows.includes(row.number));
+  const allSelected =
+    items.length > 0 && items.every((row) => selectedRows.includes(row.number));
 
   // Handle header checkbox click (Select/Deselect all)
   const handleSelectAll = () => {
     if (allSelected) {
-      setSelectedRows(selectedRows.filter((id) => !items.some((row) => row.number === id)));
+      setSelectedRows(
+        selectedRows.filter((id) => !items.some((row) => row.number === id))
+      );
     } else {
       setSelectedRows([...selectedRows, ...items.map((row) => row.number)]);
     }
