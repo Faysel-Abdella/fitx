@@ -35,13 +35,11 @@ export const ColumnTwo = () => {
         <MenuItem
           icon={<ChartNoAxesCombined className="w-5 h-5" />}
           text="대시보드"
-          href="/dashboard"
           className="flex-1"
         />
         <MenuItem
           icon={<CalendarDays className="w-5 h-5" />}
           text="캘린더"
-          href="/calendar"
           className="flex-1"
         />
       </div>
