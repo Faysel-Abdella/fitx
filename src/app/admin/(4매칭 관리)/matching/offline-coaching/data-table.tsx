@@ -1,53 +1,78 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Pagination,
+  Checkbox,
+} from "@heroui/react";
+import HeaderDropDown from "@/components/HeaderDropDown";
 
 import DropDown from "@/components/dropDown/DropDown";
 
-import { TableColumn, UserData } from "./type/type";
-
-interface DataTableProps {
-  data: UserData[];
-  columns: TableColumn<UserData>[];
-  totalItems?: number;
-  onApprove?: (id: number) => void;
-  onReject?: (id: number) => void;
-  pagination?: boolean;
-}
+import { sampleData } from "./type/data";
+import React from "react";
 
 const Option = [
   { key: "1", label: "전체 보기" },
   { key: "2", label: "전체 보기" },
   { key: "3", label: "전체 보기" },
 ];
-export function DataTable({
-  data,
-  columns,
-  totalItems = 0,
-  pagination = true,
-}: DataTableProps) {
-  const [selectedRows, setSelectedRows] = useState<number[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+export function DataTable() {
+  const viewOptions = [
+    { key: "10", label: "10개씩 보기" },
+    { key: "20", label: "20개씩 보기" },
+    { key: "50", label: "50개씩 보기" },
+    { key: "100", label: "100개씩 보기" },
+  ];
 
-  const toggleSelectAll = () => {
-    if (selectedRows.length === data.length) {
-      setSelectedRows([]);
+  const viewOptionsDefault = viewOptions[0].key;
+  const [viewValue, setViewValue] = useState(viewOptionsDefault);
+  const [page, setPage] = useState(1);
+  const rowsPerPage = parseInt(viewValue);
+  const pages = Math.ceil(sampleData.length / rowsPerPage);
+
+  const items = React.useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    return sampleData.slice(start, end);
+  }, [page, rowsPerPage]);
+
+  // State to track selected rows
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+
+  // Check if all rows on the page are selected
+  const allSelected =
+    items.length > 0 &&
+    items.every((row) => selectedRows.includes(row.id as number));
+
+  // Handle header checkbox click (Select/Deselect all)
+  const handleSelectAll = () => {
+    if (allSelected) {
+      setSelectedRows(
+        selectedRows.filter((id) => !items.some((row) => row.id === id))
+      );
     } else {
-      setSelectedRows(data.map((row) => row.id));
+      setSelectedRows([
+        ...selectedRows,
+        ...items.map((row) => row.id as number),
+      ]);
     }
   };
 
-  const toggleSelectRow = (id: number) => {
-    setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
-    );
-  };
-
-  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRowsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to first page when changing rows per page
+  // Handle row checkbox click (toggle selection)
+  const handleRowSelect = (id: number) => {
+    if (selectedRows.includes(id)) {
+      setSelectedRows(selectedRows.filter((selectedId) => selectedId !== id));
+    } else {
+      setSelectedRows([...selectedRows, id]);
+    }
   };
 
   return (
@@ -60,147 +85,111 @@ export function DataTable({
             options={Option}
             defaultSelectedKeys={Option[0].key}
             selectStyles="w-[124px] bg-white"
+            selectContainerStyles="w-full"
           />
-          <select
-            value={rowsPerPage}
-            onChange={handleRowsPerPageChange}
-            className="flex items-center text-sm text-gray-600 bg-white border-1 border-[#DCDCDC] rounded-[5px] cursor-pointer"
-          >
-            <option value={10}>10개씩 보기</option>
-            <option value={20}>20개씩 보기</option>
-            <option value={50}>50개씩 보기</option>
-          </select>
+          <HeaderDropDown
+            options={viewOptions}
+            defaultSelectedKey={viewOptionsDefault}
+            value={viewValue}
+            setNewValue={setViewValue}
+            styles="w-[100px]"
+            mainStyles="bg-transparent border border-grayBorder rounded-[5px]"
+          />
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-[#F5F5F5]">
-            <tr>
-              <th className=" w-12 px-4 py-3">
-                <input
-                  type="checkbox"
-                  checked={selectedRows.length === data.length}
-                  onChange={toggleSelectAll}
-                  className="rounded border-gray-300"
-                />
-              </th>
-              {columns.map((column) => (
-                <th
-                  key={column.key}
-                  className="px-4 py-3 text-center text-sm font-medium text-gray-600 whitespace-nowrap"
-                  style={column.width ? { width: column.width } : undefined}
-                >
-                  {column.header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {data
-              .slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
-              .map((row) => (
-                <tr key={row.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3">
-                    <input
-                      type="checkbox"
-                      checked={selectedRows.includes(row.id)}
-                      onChange={() => toggleSelectRow(row.id)}
-                      className="rounded border-gray-300"
-                    />
-                  </td>
-                  {columns.map((column) => (
-                    <td
-                      key={`${row.id}-${column.key}`}
-                      className="text-center px-4 py-3 text-sm whitespace-nowrap overflow-hidden text-ellipsis"
-                    >
-                      {column.key === "status" ? (
-                        <div className="flex justify-center">
-                          {row.status === "confirmed" ? (
-                            <span className="text-[#006BFF] underline underline-offset-1">
-                              확정
-                            </span>
-                          ) : row.status === "rejected" ? (
-                            <span className="text-[#BE5F5F]">거절</span>
-                          ) : null}
-                          {row.status === "pending" && (
-                            <div className="flex gap-2 mt-2">
-                              <button
-                                onClick={() => {}}
-                                className="px-3 py-1 border-1  border-[#4D4D4D] text-sm text-white bg-[#4D4D4D] rounded-[5px] "
-                              >
-                                승인
-                              </button>
-                              <button
-                                onClick={() => {}}
-                                className="px-3 py-1 text-sm border-1 border-[#4D4D4D] text-black rounded-[5px] hover:bg-gray-50"
-                              >
-                                거절
-                              </button>
-                            </div>
-                          )}
-                          {row.status === "Ends" && (
-                            <span className="text-black">매칭 종료</span>
-                          )}
-                        </div>
-                      ) : (
-                        row[column.key as keyof UserData]
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Pagination */}
-      {pagination && (
-        <div className="flex justify-center p-4 border-t">
-          <nav className="flex items-center gap-1">
-            {/* Previous Button */}
-            <button
-              className="p-1 disabled:opacity-50"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              <ChevronLeftIcon className="w-5 h-5 text-gray-400" />
-            </button>
-
-            {/* Dynamic Pagination Buttons */}
-            {Array.from(
-              { length: Math.ceil(totalItems / rowsPerPage) },
-              (_, i) => i + 1
-            ).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`px-3 py-1 text-sm rounded ${
-                  currentPage === page
-                    ? "text-blue-600 font-bold"
-                    : "text-gray-600 hover:bg-gray-50"
-                }`}
-              >
-                {page}
-              </button>
+      <article className="mt-[30px]">
+        <Table
+          aria-label="Data Table"
+          shadow="none"
+          classNames={{
+            th: [
+              "font-normal text-[16px] bg-[#EEEEEE] text-[#A1A9A3] h-[48px] text-center",
+            ],
+            td: ["text-center font-normal text-base text-[#363941]"],
+          }}
+          bottomContent={
+            <div className="flex w-full justify-center mt-8">
+              <Pagination
+                isCompact
+                showControls
+                showShadow
+                color="primary"
+                page={page}
+                total={pages}
+                onChange={(page) => setPage(page)}
+              />
+            </div>
+          }
+        >
+          <TableHeader>
+            <TableColumn className="flex justify-center items-center">
+              <Checkbox
+                onChange={handleSelectAll}
+                isSelected={allSelected}
+                className="size-[14px] rounded-[2px] bg-transparent"
+              />
+            </TableColumn>
+            <TableColumn>번호</TableColumn>
+            <TableColumn>이름</TableColumn>
+            <TableColumn>휴대전화번호</TableColumn>
+            <TableColumn>아이디</TableColumn>
+            <TableColumn>신청 일시</TableColumn>
+            <TableColumn>승인 일시</TableColumn>
+            <TableColumn>상태</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {items.map((row) => (
+              <TableRow key={row.id} className="border-b-1">
+                <TableCell>
+                  <Checkbox
+                    className="text-center size-[14px] rounded-[2px]"
+                    onChange={() => handleRowSelect(row.id as number)}
+                    isSelected={selectedRows.includes(row.id as number)}
+                  />
+                </TableCell>
+                <TableCell>{row.id}</TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.phone}</TableCell>
+                <TableCell>{row.userId}</TableCell>
+                <TableCell>{row.requestDate}</TableCell>
+                <TableCell>{row.approvalDate}</TableCell>
+                <TableCell>
+                  <div className="flex justify-center">
+                    {row.status === "confirmed" ? (
+                      <span className="text-[#006BFF] underline underline-offset-1">
+                        확정
+                      </span>
+                    ) : row.status === "rejected" ? (
+                      <span className="text-[#BE5F5F]">거절</span>
+                    ) : null}
+                    {row.status === "pending" && (
+                      <div className="flex gap-2 mt-2">
+                        <button
+                          onClick={() => {}}
+                          className="px-3 py-1 border-1  border-[#4D4D4D] text-sm text-white bg-[#4D4D4D] rounded-[5px] "
+                        >
+                          승인
+                        </button>
+                        <button
+                          onClick={() => {}}
+                          className="px-3 py-1 text-sm border-1 border-[#4D4D4D] text-black rounded-[5px] hover:bg-gray-50"
+                        >
+                          거절
+                        </button>
+                      </div>
+                    )}
+                    {row.status === "Ends" && (
+                      <span className="text-black">매칭 종료</span>
+                    )}
+                  </div>
+                </TableCell>
+              </TableRow>
             ))}
-
-            {/* Next Button */}
-            <button
-              className="p-1 disabled:opacity-50"
-              onClick={() =>
-                setCurrentPage((prev) =>
-                  Math.min(prev + 1, Math.ceil(totalItems / rowsPerPage))
-                )
-              }
-              disabled={currentPage === Math.ceil(totalItems / rowsPerPage)}
-            >
-              <ChevronRightIcon className="w-5 h-5 text-gray-400" />
-            </button>
-          </nav>
-        </div>
-      )}
+          </TableBody>
+        </Table>
+      </article>
     </div>
   );
 }
