@@ -1,14 +1,13 @@
 "use client";
-import { useState } from "react";
 import logo from "@/app/assets/Logo.svg";
-import Image from "next/image";
-import { Input } from "@heroui/react";
-import { useDisclosure } from "@heroui/react";
 import Modal from "@/components/modals/Modal";
 import FindIdModal from "@/components/modals/loginModals/FindIdModal";
-import { Eye, EyeIcon, EyeOff, EyeOffIcon } from "lucide-react";
 import FindPasswordModal from "@/components/modals/loginModals/FindPasswordModal";
+import { useDisclosure } from "@heroui/react";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginPage = () => {
   const [modalType, setModalType] = useState<"findId" | "findPassword" | null>(
@@ -45,16 +44,6 @@ const LoginPage = () => {
               아이디<span className="text-[#FF0000]">*</span>
             </label>
             <div className="">
-              {/* {" "}
-              <Input
-                type="text"
-                placeholder=""
-                variant="bordered"
-                classNames={{
-                  inputWrapper: "py-6",
-                  input: "text-base",
-                }}
-              /> */}
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="아이디를 입력해주세요."
@@ -90,31 +79,6 @@ const LoginPage = () => {
                 </span>
               </button>
             </div>
-            {/* <div className="flex items-center rounded-xl">
-              <Input
-                type={showPassword ? "text" : "password"}
-                variant="bordered"
-                placeholder="비밀번호를 입력해주세요."
-                className="border-none"
-                classNames={{
-                  inputWrapper: "py-6",
-                  input: "text-base",
-                }}
-                endContent={
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-500"
-                  >
-                    {showPassword ? (
-                      <EyeOffIcon size={20} />
-                    ) : (
-                      <EyeIcon size={20} />
-                    )}
-                  </button>
-                }
-              />
-            </div> */}
           </div>
 
           {/* Login Button */}
