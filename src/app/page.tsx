@@ -91,10 +91,7 @@ const LoginPage = () => {
           </div>
 
           {/* Links */}
-          <div className="flex justify-center mt-4 space-x-4 text-[#006BFF] text-sm">
-            <button type="button" onClick={() => {}}>
-              회원가입
-            </button>
+          <div className="flex justify-center mt-4 space-x-4 text-[#006BFF] font-semibold text-sm">
             <button type="button" onClick={() => openModal("findId")}>
               ID 찾기
             </button>

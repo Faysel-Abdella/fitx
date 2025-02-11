@@ -14,7 +14,7 @@ const FindIdModal = () => {
         <div className="flex flex-col gap-1">
           <p className="text-[#333333]">이름</p>
           <TextInput
-            placeholder="이메일 @ 도메인 입력"
+            placeholder="최소 두 글자 이상 입력"
             type="text"
             inputWrapper="bg-[#FAFAFA] border-1 border-[#FAFAFA]"
           />
@@ -34,7 +34,7 @@ const FindIdModal = () => {
         </button>
       </div>
       <div className="flex flex-col mt-5 gap-1">
-        <p className="text-sm text-center text-[#FF0000]">
+        <p className="text-sm font-medium text-center text-[#FF0000]">
           이름, 이메일주소와 일치하는 아이디를 메일로 전달드렸습니다.
         </p>
         <button className="w-[400px] py-3 rounded-[10px] bg-[#D1D1D1] text-[#333333]">

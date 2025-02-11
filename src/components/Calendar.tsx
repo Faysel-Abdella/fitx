@@ -1,128 +1,187 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 
-import Image from "next/image";
-import React from "react";
+import { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 
-const Calendar = () => {
+export interface Task {
+  date: number;
+  title: string;
+}
+
+interface CalendarProps {
+  defaultTasks: Task[];
+}
+
+export default function Calendar({ defaultTasks }: CalendarProps) {
+  const today = new Date();
+
+  // Memoize the default tasks to avoid unnecessary re-renders.
+  const memoizedDefaultTasks = useMemo(() => defaultTasks, [defaultTasks]);
+
+  // All hook calls below won't be flagged by ESLint.
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [tasks, setTasks] = useState<Task[]>(memoizedDefaultTasks);
+  const [selectedDay, setSelectedDay] = useState<number | null>(
+    today.getDate()
+  );
+  const [newTask, setNewTask] = useState<string>("");
+  const [inputVisible, setInputVisible] = useState<boolean>(false);
+
+  const getDaysInMonth = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  const getFirstDayOfMonth = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+  const isToday = (day: number) =>
+    today.getDate() === day &&
+    today.getMonth() === currentMonth.getMonth() &&
+    today.getFullYear() === currentMonth.getFullYear();
+
+  const isPastDate = (day: number) => {
+    if (currentMonth.getFullYear() < today.getFullYear()) return true;
+    if (currentMonth.getFullYear() > today.getFullYear()) return false;
+    if (currentMonth.getMonth() < today.getMonth()) return true;
+    if (currentMonth.getMonth() > today.getMonth()) return false;
+    return day < today.getDate();
+  };
+
+  const hasTask = (day: number) => tasks.some((task) => task.date === day);
+
+  const previousMonth = () => {
+    setCurrentMonth(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1)
+    );
+    setSelectedDay(null);
+    setInputVisible(false);
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1)
+    );
+    setSelectedDay(null);
+    setInputVisible(false);
+  };
+
+  const handleDayClick = (day: number) => {
+    if (isPastDate(day)) return;
+    if (selectedDay === day && inputVisible) {
+      setInputVisible(false);
+    } else {
+      setSelectedDay(day);
+      setInputVisible(true);
+    }
+  };
+
+  const addTask = () => {
+    if (selectedDay && newTask.trim() && !isPastDate(selectedDay)) {
+      setTasks([...tasks, { date: selectedDay, title: newTask.trim() }]);
+      setNewTask("");
+      setInputVisible(false);
+    }
+  };
+
+  const daysInMonth = getDaysInMonth(currentMonth);
+  const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
+
+  const monthName = currentMonth.toLocaleString("ko-KR", { month: "long" });
+  const year = currentMonth.toLocaleString("ko-KR", { year: "numeric" });
+
+  const days = [];
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    days.push(
+      <div key={`empty-${i}`} className="h-32 sm:h-40 md:h-48 lg:h-56" />
+    );
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    let dayBg = "";
+    if (isPastDate(day)) {
+      dayBg = hasTask(day) ? "bg-[#D1D1D1] text-[#4D4D4D]" : "bg-[#F2F2F2]";
+    } else {
+      if (hasTask(day)) dayBg = "bg-black text-white";
+    }
+
+    const dayClasses = `
+      h-32 sm:h-40 md:h-48 lg:h-56 border border-gray-200 p-2 transition-colors
+      rounded-[13px]
+      ${!isPastDate(day) ? "cursor-pointer" : ""}
+      ${dayBg}
+      ${isToday(day) ? "ring-2 ring-blue-500" : ""}
+      ${selectedDay === day ? "ring-2 ring-green-500" : ""}
+    `.trim();
+
+    days.push(
+      <div key={day} className={dayClasses} onClick={() => handleDayClick(day)}>
+        <span className="font-medium text-lg">{day}</span>
+        {hasTask(day) && (
+          <div className="mt-1 text-sm">
+            {tasks
+              .filter((task) => task.date === day)
+              .map((task, index) => (
+                <div key={index} className="truncate">
+                  {task.title}
+                </div>
+              ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col gap-[30px] border-1 border-[#DCDCDC] bg-white rounded-[10px] px-[18px] pt-[18px] pb-[43px]">
-      <div className="flex gap-1 items-center">
-        <Image src={'/chevroletleft.svg'} alt="left" width={20} height={12}/>
-        <p className="font-bold text-[#000000] text-[20px]">1월</p>
-         <Image src={'/chevroletright2.svg'} alt="left" width={20} height={12}/>
+    <div className="w-full p-4">
+      <div className="flex items-center gap-3 mb-6">
+        <button
+          onClick={previousMonth}
+          className="p-2 hover:bg-gray-100 rounded-full"
+          aria-label="이전 달"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <h2 className="text-2xl font-semibold">
+          {year} {monthName}
+        </h2>
+        <button
+          onClick={nextMonth}
+          className="p-2 hover:bg-gray-100 rounded-full"
+          aria-label="다음 달"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
       </div>
-      <div className="flex flex-col gap-[15px]">
-        <div className="flex gap-[16px]">
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">1</p>
+
+      <div className="grid grid-cols-7 gap-5 mb-4">
+        {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
+          <div key={day} className="text-center font-medium py-2 text-lg">
+            {day}
           </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <div className="flex flex-col items-center">
-              <p className="font-bold text-black">2</p>
-              <p className="text-[#4D4D4DB2]">스쿼트</p>
-              <p className="text-[#4D4D4DB2]">벤치프레스</p>
-            </div>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-black border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <div className="flex flex-col items-center">
-              <p className="font-bold text-white">3</p>
-              <p className="text-white">스쿼트</p>
-              <p className="text-white">벤치프레스</p>
-              <p className="text-white">데드리프트</p>
-            </div>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">4</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">5</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">6</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">7</p>
-          </div>
-        </div>
-        <div className="flex gap-[16px]">
-        <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">8</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">9</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">10</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">11</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">12</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">13</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">14</p>
-          </div>
-        </div>
-        <div className="flex gap-[16px]">
-        <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">15</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">16</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">17</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">18</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">19</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">20</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">21</p>
-          </div>
-        </div>
-        <div className="flex gap-[16px]">
-        <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">22</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">23</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">24</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">25</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">26</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">27</p>
-          </div>
-          <div className="flex justify-center w-full h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">28</p>
-          </div>
-        </div>
-        <div className="flex gap-[16px]">
-        <div className="flex justify-center w-[14%] h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">29</p>
-          </div>
-          <div className="flex justify-center w-[14%] h-[159px] bg-[#DCDCDC61] border-1 border-[#EEEEEE] rounded-[13px] pt-[13px]">
-            <p className="font-bold text-black">30</p>
-          </div>
-        </div>
+        ))}
+        {days}
       </div>
+
+      {inputVisible && selectedDay !== null && !isPastDate(selectedDay) && (
+        <div className="mt-6">
+          <h3 className="text-xl font-semibold mb-3">{selectedDay}일 작업</h3>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
+              onBlur={() => setInputVisible(false)}
+              className="flex-grow border rounded px-3 py-2 text-lg"
+              placeholder="새 작업 추가"
+            />
+            <button
+              onClick={addTask}
+              className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 text-lg"
+            >
+              <Plus className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Calendar;
+}

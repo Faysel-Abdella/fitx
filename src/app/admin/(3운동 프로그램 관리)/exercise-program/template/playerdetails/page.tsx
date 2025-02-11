@@ -1,5 +1,5 @@
 "use client";
-import Calendar from "@/components/Calendar";
+import Calendar, { Task } from "@/components/Calendar";
 import Header from "@/components/Header";
 import ProfilePreview from "@/components/ProfilePreview";
 import Image from "next/image";
@@ -15,8 +15,8 @@ const bodyData = [
     { key: "2", label: "1" },
     { key: "3", label: "4" },
     { key: "4", label: "80 kg" },
-   {key:"5",label: "7"},
-   {key:"6" ,label:"2분"},
+    { key: "5", label: "7" },
+    { key: "6", label: "2분" },
   ],
   [
     {
@@ -32,22 +32,41 @@ const bodyData = [
 ];
 const bodyData2 = [
   [
-    {key:"1",label:<Image src={"/tick.svg"} alt="" width={14} height={14} />},
-    {key:"2",label:"1"},
-   {key:"3",label: "4"},
-   {key:"4", label:"57 kg"},
-   {key:"5", label:"5"},
-   {key:"6", label:"2분"},
+    {
+      key: "1",
+      label: <Image src={"/tick.svg"} alt="" width={14} height={14} />,
+    },
+    { key: "2", label: "1" },
+    { key: "3", label: "4" },
+    { key: "4", label: "57 kg" },
+    { key: "5", label: "5" },
+    { key: "6", label: "2분" },
   ],
 ];
 
-const headerData = [{key:"1",label:""},{key:"2" ,label:"세트"}, {key:"3", label:"횟수"}, {key:"4",label:"중량"}, {key:"5",label:"RPE"}, {key:"6",label:"휴식"}];
+const headerData = [
+  { key: "1", label: "" },
+  { key: "2", label: "세트" },
+  { key: "3", label: "횟수" },
+  { key: "4", label: "중량" },
+  { key: "5", label: "RPE" },
+  { key: "6", label: "휴식" },
+];
 const PlayerDetail = () => {
   const router = useRouter();
   const handleroute = () => {
     console.log("Button clicked");
     router.push("/admin/exercise-program/template/playerdetails/addexercise");
   };
+
+  const today = new Date();
+  const secondDefaultTasks: Task[] = [
+    { date: today.getDate(), title: "스쿼트" },
+    { date: today.getDate(), title: "벤치프레스" },
+    { date: today.getDate(), title: "데드리프트" },
+    { date: today.getDate() - 1, title: "스쿼트" },
+    { date: today.getDate() - 1, title: "벤치프레스" },
+  ];
   return (
     <div>
       <Header title="프로그램 구성" />
@@ -64,7 +83,9 @@ const PlayerDetail = () => {
       </div>
       <div className="flex flex-col p-5 mt-5 bg-white rounded-[10px]">
         <p className="text-[#4D4D4D] font-bold mb-[14px]">달력</p>
-        <Calendar />
+
+        {/* this is calander area  */}
+        <Calendar defaultTasks={secondDefaultTasks} />
         <div className="flex justify-center mt-5">
           <button
             onClick={handleroute}
