@@ -5,17 +5,15 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import DropDown from "@/components/dropDown/DropDown";
 
-
-import { TableColumn, UserData } from "../type/type";
-
+import { TableColumn, UserData } from "./type/type";
 
 interface DataTableProps {
   data: UserData[];
- columns: TableColumn<UserData>[];
+  columns: TableColumn<UserData>[];
   totalItems?: number;
   onApprove?: (id: number) => void;
   onReject?: (id: number) => void;
-  pagination?:boolean
+  pagination?: boolean;
 }
 
 const Option = [
@@ -27,7 +25,7 @@ export function DataTable({
   data,
   columns,
   totalItems = 0,
-  pagination=true
+  pagination = true,
 }: DataTableProps) {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,7 +49,6 @@ export function DataTable({
     setRowsPerPage(Number(e.target.value));
     setCurrentPage(1); // Reset to first page when changing rows per page
   };
-  
 
   return (
     <div className="w-full bg-white p-[40px] rounded-[20px] flex flex-col space-y-5">
@@ -86,7 +83,7 @@ export function DataTable({
                   type="checkbox"
                   checked={selectedRows.length === data.length}
                   onChange={toggleSelectAll}
-                  className="rounded border-gray-300" 
+                  className="rounded border-gray-300"
                 />
               </th>
               {columns.map((column) => (
@@ -122,7 +119,7 @@ export function DataTable({
                         <div className="flex justify-center">
                           {row.status === "confirmed" ? (
                             <span className="text-[#006BFF] underline underline-offset-1">
-                             확정
+                              확정
                             </span>
                           ) : row.status === "rejected" ? (
                             <span className="text-[#BE5F5F]">거절</span>
@@ -130,13 +127,13 @@ export function DataTable({
                           {row.status === "pending" && (
                             <div className="flex gap-2 mt-2">
                               <button
-                                onClick={()=>{}}
+                                onClick={() => {}}
                                 className="px-3 py-1 border-1  border-[#4D4D4D] text-sm text-white bg-[#4D4D4D] rounded-[5px] "
                               >
                                 승인
                               </button>
                               <button
-                                onClick={()=>{}}
+                                onClick={() => {}}
                                 className="px-3 py-1 text-sm border-1 border-[#4D4D4D] text-black rounded-[5px] hover:bg-gray-50"
                               >
                                 거절
@@ -158,50 +155,52 @@ export function DataTable({
         </table>
       </div>
 
-      
-    {/* Pagination */}
-{pagination && <div className="flex justify-center p-4 border-t">
-  <nav className="flex items-center gap-1">
-    {/* Previous Button */}
-    <button
-      className="p-1 disabled:opacity-50"
-      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-      disabled={currentPage === 1}
-    >
-      <ChevronLeftIcon className="w-5 h-5 text-gray-400" />
-    </button>
+      {/* Pagination */}
+      {pagination && (
+        <div className="flex justify-center p-4 border-t">
+          <nav className="flex items-center gap-1">
+            {/* Previous Button */}
+            <button
+              className="p-1 disabled:opacity-50"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeftIcon className="w-5 h-5 text-gray-400" />
+            </button>
 
-    {/* Dynamic Pagination Buttons */}
-    {Array.from(
-      { length: Math.ceil(totalItems / rowsPerPage) },
-      (_, i) => i + 1
-    ).map((page) => (
-      <button
-        key={page}
-        onClick={() => setCurrentPage(page)}
-        className={`px-3 py-1 text-sm rounded ${
-          currentPage === page
-            ? "text-blue-600 font-bold"
-            : "text-gray-600 hover:bg-gray-50"
-        }`}
-      >
-        {page}
-      </button>
-    ))}
+            {/* Dynamic Pagination Buttons */}
+            {Array.from(
+              { length: Math.ceil(totalItems / rowsPerPage) },
+              (_, i) => i + 1
+            ).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-3 py-1 text-sm rounded ${
+                  currentPage === page
+                    ? "text-blue-600 font-bold"
+                    : "text-gray-600 hover:bg-gray-50"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
 
-    {/* Next Button */}
-    <button
-      className="p-1 disabled:opacity-50"
-      onClick={() =>
-        setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(totalItems / rowsPerPage)))
-      }
-      disabled={currentPage === Math.ceil(totalItems / rowsPerPage)}
-    >
-      <ChevronRightIcon className="w-5 h-5 text-gray-400" />
-    </button>
-  </nav>
-</div>}
-
+            {/* Next Button */}
+            <button
+              className="p-1 disabled:opacity-50"
+              onClick={() =>
+                setCurrentPage((prev) =>
+                  Math.min(prev + 1, Math.ceil(totalItems / rowsPerPage))
+                )
+              }
+              disabled={currentPage === Math.ceil(totalItems / rowsPerPage)}
+            >
+              <ChevronRightIcon className="w-5 h-5 text-gray-400" />
+            </button>
+          </nav>
+        </div>
+      )}
     </div>
   );
 }

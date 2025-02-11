@@ -41,7 +41,9 @@ export const HeaderArea = () => {
           insideStyles="text-[#9D9D9D] w-[250px] h-[40px]  "
           titleStyles="text-[#323232] font-bold text-base"
         />
-        <Button className="bg-[#4D4D4D] text-white rounded-md">템플릿</Button>
+        <Button className="bg-[#4D4D4D] flex-1 text-white rounded-md">
+          템플릿
+        </Button>
       </div>
     </main>
   );

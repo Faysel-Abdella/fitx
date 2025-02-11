@@ -17,7 +17,7 @@ import AddExerciseModal from "./components/AddExerciseModal";
 import Image from "next/image";
 
 const ADDExercise = () => {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [exercise, setExercise] = useState<Exercise>({
     name: "",
     sets: [{ id: 1, reps: "", rpe: "", weight: "", rest: "" }],
@@ -60,17 +60,19 @@ const ADDExercise = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Exercise Selection Input */}
           <div className="w-full py-[15px] bg-white rounded-[100px] flex justify-center items-center">
-            <button onClick={onOpen} className="text-[#006BFF] font-bold">시작하기</button>
+            <button onClick={onOpen} className="text-[#006BFF] font-bold">
+              템플릿
+            </button>
             <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            paddingHorizontal="px-0"
-            radius="rounded-[5px]"
-            modalWidthInPercent=" max-w-[100%]"
-            background_color="bg-[#F5F5F5]"
-          >
-            <AddExerciseModal cancel={onOpenChange} />
-          </Modal>
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              paddingHorizontal="px-0"
+              radius="rounded-[5px]"
+              modalWidthInPercent=" max-w-[100%]"
+              background_color="bg-[#F5F5F5]"
+            >
+              <AddExerciseModal cancel={onOpenChange} />
+            </Modal>
           </div>
           <div className="relative">
             <div className="flex items-center w-full cursor-pointer">
@@ -82,7 +84,6 @@ const ADDExercise = () => {
                 readOnly
               />
               <ChevronRightIcon className="w-5 h-5 text-gray-400 absolute right-3" />
-    
             </div>
           </div>
 
@@ -165,11 +166,10 @@ const ADDExercise = () => {
                 onClick={addSet}
                 className="text-[#006BFF] text-center hover:text-blue-600 text-sm font-medium"
               >
-              <div className="flex gap-1">
-                <Image src={'/plus.svg'} alt="plus" width={11} height={11} />
-                <p className="">세트 추가</p>
-              </div>
-                
+                <div className="flex gap-1">
+                  <Image src={"/plus.svg"} alt="plus" width={11} height={11} />
+                  <p className="">세트 추가</p>
+                </div>
               </button>
             </div>
           </div>

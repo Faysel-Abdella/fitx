@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import TopContent from "./components/TopContent";
-import ShowTable from "./components/showTable";
+import TopContent from "./TopContent";
+import ShowTable from "./showTable";
 import Calendar from "@/components/Calendar";
 import { columns, sampleData2 } from "./type/data";
-import { BottomDataTable } from "./components/bottom-data-table";
+import { BottomDataTable } from "./bottom-data-table";
 import { Task } from "@/components/Calendar";
 
 const page = () => {

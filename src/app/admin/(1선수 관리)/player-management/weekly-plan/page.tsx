@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import leftArrow from "@/assets/icons/leftArrow.svg";
 import rightArrow from "@/assets/icons/rightArrow.svg";
 import Header from "@/components/Header";
@@ -20,8 +21,18 @@ import TableTwo from "./TableTwo";
 import image from "@/assets/icons/x.svg";
 
 export default function WeeklyPlan() {
-  const days = Array.from({ length: 7 }, (_, i) => i + 1);
-  const selectedDay = 3;
+  const daysPerWeek = 7;
+  const totalWeeks = 4; // Adjust this based on your calendar needs
+
+  // State for selected day and selected week
+  const [selectedWeek, setSelectedWeek] = useState(1);
+  const [selectedDay, setSelectedDay] = useState(1);
+
+  // Calculate the days for the current selected week
+  const startDay = (selectedWeek - 1) * daysPerWeek + 1;
+  const weekDays = Array.from({ length: daysPerWeek }, (_, i) => startDay + i);
+
+  // Task data for selected day
   const tasks = [
     {
       title: "스케줄",
@@ -37,6 +48,21 @@ export default function WeeklyPlan() {
     },
   ];
 
+  // Week navigation
+  const handleLeftArrow = () => {
+    if (selectedWeek > 1) {
+      setSelectedWeek(selectedWeek - 1);
+      setSelectedDay((selectedWeek - 2) * daysPerWeek + 1); // Adjust selected day to match new week
+    }
+  };
+
+  const handleRightArrow = () => {
+    if (selectedWeek < totalWeeks) {
+      setSelectedWeek(selectedWeek + 1);
+      setSelectedDay(selectedWeek * daysPerWeek + 1); // Adjust selected day to match new week
+    }
+  };
+
   // Modal state management
   const { isOpen, onOpen, onClose } = useDisclosure();
   // For the second (template) modal
@@ -50,54 +76,65 @@ export default function WeeklyPlan() {
     <section>
       <Header title="운동프로그램" />
       <div className="my-16 px-8 py-10 bg-white rounded-lg h-[700px] shadow-md max-w-[82rem] mx-auto">
-        {/* Header */}
-        <div className="mb-4">
-          <h2 className="text-lg font-bold text-[#4D4D4D]">달력</h2>
-        </div>
+        <div className="p-4">
+          {/* Header */}
+          <div className="mb-4">
+            <h2 className="text-lg font-bold text-[#4D4D4D]">달력</h2>
+          </div>
 
-        {/* Week Plan */}
-        <div className="mb-8 border-1 rounded-xl p-6 border-[#DCDCDC]">
-          <h3 className="text-xl font-bold text-[#000000] mb-4 flex items-center gap-2">
-            <span>
-              <Image src={leftArrow || "/placeholder.svg"} alt={""} />
-            </span>
-            1월 1주차
-            <span>
-              <Image src={rightArrow || "/placeholder.svg"} alt={""} />
-            </span>
-          </h3>
-          <div className="grid grid-cols-7 gap-4 pt-4">
-            {days.map((day) => (
-              <div
-                key={day}
-                className={`
-              border rounded-lg p-4 flex flex-col justify-between cursor-pointer
-              ${day === selectedDay ? "border-mainBlue" : "border-[#E9E9E9]"}
-              ${
-                day === selectedDay
-                  ? "bg-white text-[#006BFF] font-medium"
-                  : "bg-white text-gray-900"
-              }
-              transition-all duration-280 ease-in-out
-            `}
-              >
-                <div className="font-bold text-black text-center">{day}</div>
-                {day === selectedDay && (
-                  <div className="space-y-2 mt-2">
-                    {tasks.map((task, index) => (
-                      <div key={index} className="text-xs">
-                        <div className="font-bold text-[#006BFF]">
-                          {task.title}
+          {/* Week Navigation */}
+          <div className="mb-8 border rounded-xl p-6 border-[#DCDCDC]">
+            <h3 className="text-xl font-bold text-[#000000] mb-4 flex items-center gap-2">
+              <span onClick={handleLeftArrow} className="cursor-pointer">
+                <Image
+                  src={leftArrow}
+                  alt="Previous Week"
+                  width={24}
+                  height={24}
+                />
+              </span>
+              1월 {selectedWeek}주차
+              <span onClick={handleRightArrow} className="cursor-pointer">
+                <Image
+                  src={rightArrow}
+                  alt="Next Week"
+                  width={24}
+                  height={24}
+                />
+              </span>
+            </h3>
+
+            {/* Calendar Grid (7 Days Per Week) */}
+            <div className="grid grid-cols-7 gap-4 pt-4">
+              {weekDays.map((day) => (
+                <div
+                  key={day}
+                  onClick={() => setSelectedDay(day)}
+                  className={`border rounded-lg p-4 flex flex-col justify-between cursor-pointer transition-all duration-280 ease-in-out 
+                  ${
+                    day === selectedDay
+                      ? "border-mainBlue bg-white text-[#006BFF] font-medium"
+                      : "border-[#E9E9E9] bg-white text-gray-900"
+                  }`}
+                >
+                  <div className="font-bold text-black text-center">{day}</div>
+                  {day === selectedDay && (
+                    <div className="space-y-2 mt-2">
+                      {tasks.map((task, index) => (
+                        <div key={index} className="text-xs">
+                          <div className="font-bold text-[#006BFF]">
+                            {task.title}
+                          </div>
+                          <div className="text-gray-500 text-[10px] mt-1">
+                            {task.subtitle}
+                          </div>
                         </div>
-                        <div className="text-gray-500 text-[10px] mt-1">
-                          {task.subtitle}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -106,7 +143,7 @@ export default function WeeklyPlan() {
           <Button
             color={"primary"}
             className="w-[420px] py-2 font-bold rounded-full"
-            onPress={onOpen} // Open the modal when clicked
+            onPress={onOpen}
           >
             운동 추가하기
           </Button>

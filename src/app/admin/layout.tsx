@@ -9,7 +9,7 @@ export default function AdminLayout({
 }>) {
   return (
     <SideBar>
-      <div className="max-w-[1350px]">{children}</div>
+      <div>{children}</div>
     </SideBar>
   );
 }

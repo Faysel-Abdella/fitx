@@ -89,9 +89,14 @@ export default function Calendar({ defaultTasks }: CalendarProps) {
   const year = currentMonth.toLocaleString("ko-KR", { year: "numeric" });
 
   const days = [];
+
+  // For the days before the month starts, render a card with a light gray background.
   for (let i = 0; i < firstDayOfMonth; i++) {
     days.push(
-      <div key={`empty-${i}`} className="h-32 sm:h-40 md:h-48 lg:h-56" />
+      <div
+        key={`empty-${i}`}
+        className="h-32 sm:h-40 md:h-48 lg:h-56 border border-gray-200 p-2 transition-colors rounded-[13px] bg-gray-100"
+      />
     );
   }
 

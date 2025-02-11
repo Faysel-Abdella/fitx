@@ -1,6 +1,6 @@
 import React from "react";
-import TopContent from "./components/TopContent";
-import ShowTable from "./components/showTable";
+import TopContent from "./TopContent";
+import ShowTable from "./showTable";
 
 const OfflineCoaching = () => {
   return (
@@ -8,7 +8,7 @@ const OfflineCoaching = () => {
       <div className="mb-5 mx-auto w-[98%]">
         <TopContent />
       </div>
-      <ShowTable/>
+      <ShowTable />
     </>
   );
 };

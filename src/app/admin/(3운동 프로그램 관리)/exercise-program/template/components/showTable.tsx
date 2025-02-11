@@ -4,9 +4,13 @@ import { useState } from "react";
 import { DataTable } from "../components/data-table";
 import { Pagination } from "../components/pagination";
 import { Badge } from "./bagdge";
-import { TableColumn, User } from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type";
+import {
+  TableColumn,
+  User,
+} from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type";
 import Link from "next/link";
 import Image from "next/image";
+import DropDown from "@/components/dropDown/DropDown";
 
 // Dummy data for testing (100 users)
 const users: User[] = Array.from({ length: 100 }, (_, index) => ({
@@ -21,7 +25,7 @@ const users: User[] = Array.from({ length: 100 }, (_, index) => ({
 
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage] = useState(10);
 
   const columns: TableColumn<User>[] = [
     {
@@ -70,9 +74,7 @@ export default function Page() {
       header: "구성하기",
       key: "action",
       render: (value) => (
-        <button
-          className="text-[#006BFF] underline underline-offset-1 hover:text-[#006BFF]"
-        >
+        <button className="text-[#006BFF] underline underline-offset-1 hover:text-[#006BFF]">
           <Link href={"/admin/exercise-program/template/playerdetails"}>
             {value as string}
           </Link>
@@ -87,26 +89,20 @@ export default function Page() {
   const endIndex = startIndex + rowsPerPage;
   const currentUsers = users.slice(startIndex, endIndex);
 
-  // Handle rows per page change
-  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newRowsPerPage = Number.parseInt(e.target.value);
-    setRowsPerPage(newRowsPerPage);
-    setCurrentPage(1); // Reset to first page when changing rows per page
-  };
-
   return (
-    <div className="min-w-full mx-auto p-4">
-      <div className="mb-4 flex justify-between items-center">
+    <div className="min-w-full my-6">
+      <div className="py-4 px-5 rounded-tl-lg rounded-tr-lg bg-white flex justify-between items-center">
         <h2 className="text-lg font-medium">총 {users.length}명</h2>
-        <select
-          className="p-2 border border-[#DCDCDC] bg-white rounded-lg"
-          value={rowsPerPage}
-          onChange={handleRowsPerPageChange}
-        >
-          <option value={10}>10개씩 보기</option>
-          <option value={20}>20개씩 보기</option>
-          <option value={50}>50개씩 보기</option>
-        </select>
+
+        <DropDown
+          options={[
+            { key: "total", label: "10개씩 보기" },
+            { key: "active", label: "20개씩 보기" },
+            { key: "inactive", label: "30개씩 보기" },
+          ]}
+          defaultSelectedKeys="total"
+          insideStyles="w-[128px] h-[40px]"
+        />
       </div>
 
       <DataTable columns={columns} data={currentUsers} />

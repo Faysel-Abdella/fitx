@@ -1,57 +1,72 @@
-"use client"
+"use client";
 
-import React from "react"
-import type { TableProps } from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type"
+import React from "react";
+import type { TableProps } from "@/app/admin/(3운동 프로그램 관리)/exercise-program/template/types/type";
+// import {
+//   Table,
+//   TableHeader,
+//   TableColumn,
+//   TableBody,
+//   TableRow,
+//   TableCell,
+// } from "@heroui/react";
 
-export function DataTable<T extends { id: number | string }>({ columns, data, className = "" }: TableProps<T>) {
+export function DataTable<T extends { id: number | string }>({
+  columns,
+  data,
+  className = "",
+}: TableProps<T>) {
   return (
-    <div className={` w-full overflow-hidden rounded-lg ${className}`}>
-      <div className="w-full overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
+    <div className={` w-full overflow-hidden rounded-b-lg ${className}`}>
+      <table className="w-full divide-y  divide-gray-200">
+        <thead className="bg-gray-50 ">
+          <tr>
+            {columns.map((column) => (
+              <th
+                key={column.key.toString()}
+                className="px-6 py-3 text-left text-sm font-medium text-gray-500"
+              >
+                {column.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y px-12 divide-gray-200">
+          {data.map((row) => (
+            <tr key={row.id} className="hover:bg-gray-50">
               {columns.map((column) => (
-                <th key={column.key.toString()} className="px-6 py-3 text-left text-sm font-medium text-gray-500">
-                  {column.header}
-                </th>
+                <td
+                  key={`${row.id}-${column.key.toString()}`}
+                  className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
+                >
+                  {renderCellContent(column, row)}
+                </td>
               ))}
             </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {data.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-50">
-                {columns.map((column) => (
-                  <td
-                    key={`${row.id}-${column.key.toString()}`}
-                    className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
-                  >
-                    {renderCellContent(column, row)}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
 
-function renderCellContent<T>(column: TableProps<T>["columns"][number], row: T): React.ReactNode {
+function renderCellContent<T>(
+  column: TableProps<T>["columns"][number],
+  row: T
+): React.ReactNode {
   if (column.render) {
-    return column.render(row[column.key as keyof T], row)
+    return column.render(row[column.key as keyof T], row);
   }
 
-  const value = row[column.key as keyof T]
+  const value = row[column.key as keyof T];
 
   if (React.isValidElement(value)) {
-    return value
+    return value;
   }
 
   if (typeof value === "object" && value !== null) {
-    return JSON.stringify(value)
+    return JSON.stringify(value);
   }
 
-  return String(value)
+  return String(value);
 }
-

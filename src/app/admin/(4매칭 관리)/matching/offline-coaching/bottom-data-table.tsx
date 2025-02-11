@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { TableColumn, UserData } from "../type/type";
-import { columns2 } from "../type/data";
+import { TableColumn, UserData } from "./type/type";
+import { columns2 } from "./type/data";
 
 interface DataTableProps {
   data: UserData[];
